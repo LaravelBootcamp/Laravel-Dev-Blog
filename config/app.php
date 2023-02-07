@@ -153,6 +153,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
 
     'providers' => [
 
@@ -194,7 +195,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
