@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\{
+    PostController, CategoryController, TagController
+};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,5 +25,11 @@ Route::get('/', function () {
 /** Admin route **/
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Posts 
+Route::prefix('dashboard')->group(function() {
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::resource('post', PostController::class);
+    Route::resource('categorie', CategoryController::class);
+    Route::resource('tag', TagController::class);
+});
