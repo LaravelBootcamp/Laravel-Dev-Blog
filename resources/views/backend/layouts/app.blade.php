@@ -63,7 +63,7 @@
             @include('backend.layouts.sidenavbar')
         </div>
         <div id="layoutSidenav_content">
-            <main>                
+            <main class="mt-4">                
                 @yield('content')
             </main>
 
