@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Supports\Database\FileHandle;
+use App\Models\{File, Category};
 
 class CategoryController extends Controller
 {
+    use FileHandle;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -18,7 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.category.index');
+        $categorys = Category::with('file')->get();
+        // return $categorys;
+        return view('backend.pages.category.index', compact('categorys'));
     }
 
     /**
@@ -39,8 +45,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return $request;
+        //Net to fix;
+        //return $request;
+        
+        $cat = Category::create([
+            'name' => $request->name,
+            'description' => "Cat one description",
+            'status'        => $request->status ? $request->status : 0,
+        ]);
+
+        $cat->file()->create($this->uploadFile($request->file('category_image')));
+
+        return redirect()->back();
     }
 
     /**
@@ -85,6 +101,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cat = Category::find($id);
+        $cat->delete();
+        $cat->file()->delete();
+        return redirect()->back();
     }
 }

@@ -498,3 +498,17 @@
       border-radius: 0.25rem !important;
     }
 
+
+/**
+ * Dashboard custom css start
+ */
+
+.cagegory_create .form-switch .form-check-input{
+  height: 1.5em;
+  width: 2.5em;
+}
+
+.cagegory_create .form-check-label{
+  margin-top: 0.3em;
+  margin-left: 1rem;
+}

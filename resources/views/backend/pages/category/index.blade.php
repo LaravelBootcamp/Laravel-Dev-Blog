@@ -21,29 +21,44 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Status</th>
                             <th>Image</th>
-                            <th>Created At</th>
+                            <th>Updated At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($categorys as $cat)
                         <tr>
-                            <td><input type="checkbox" class="checkbox" name="category[]" value="1"> </td>
-                            <td>Category one</td>
-                            <td>Image here</td>
-                            <td>2011/04/25</td>
+                            <td><input type="checkbox" class="checkbox" name="category[]" value="{{$cat->id}}"> </td>
+                            <td>{{$cat->name}}</td>
+                            <th>{{$cat->status}}</th>
                             <td>
-                                <button class="btn p-2 px-3 badge text-bg-primary">Edit</button>
-                                <button class="btn p-2 px-3 badge text-bg-danger">Delete</button>
+                                <img src="{{$cat->file[0]->view_path}}" width="50" alt="cat image">
+                            </td>
+                            <td>{{$cat->updated_at}}</td>
+                            <td>
+                                {{-- <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a> --}}
+                                <form action="{{route('categorie.destroy', $cat->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn p-2 px-3 badge text-bg-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6">No Data found</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Status</th>
                             <th>Image</th>
-                            <th>Created At</th>
+                            <th>Updated At</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
