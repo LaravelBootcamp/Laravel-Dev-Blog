@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('orginal_name');
             $table->string('storage_path');
             $table->string('view_path');
-            $table->integer('file_size');
+            $table->integer('file_size')->nullable();
             $table->string('file_type');
             $table->integer('user_id');
             $table->morphs('fileable');

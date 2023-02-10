@@ -32,4 +32,5 @@ Route::prefix('dashboard')->group(function() {
     Route::resource('post', PostController::class);
     Route::resource('categorie', CategoryController::class);
     Route::resource('tag', TagController::class);
+    // Route::post('/bulkcatdelete', [CategoryController::class, 'bulkDelete'])->name('bulkCatDelete');
 });

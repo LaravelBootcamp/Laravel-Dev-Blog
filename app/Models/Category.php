@@ -17,7 +17,7 @@ class Category extends Model
 
     public function file()
     {
-        return $this->morphMany(File::class, 'fileable');
+        return $this->morphOne(File::class, 'fileable');
     }
 
     public function getUpdatedAtAttribute($value)

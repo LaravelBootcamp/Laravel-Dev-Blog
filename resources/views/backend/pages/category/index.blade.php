@@ -1,8 +1,10 @@
 @extends('backend.layouts.app')
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Cagegorys</h1>
-    <a href="{{route('categorie.create')}}" class="btn btn-outline-primary">Add New</a>
+    <div class="d-flex my-3 align-items-center g-2">
+        <h3 class="m-0 mr-2">Cagegorys</h3>
+        <a href="{{route('categorie.create')}}" class="btn btn-outline-primary btn-sm d-inline-block ml-2">Add New</a>
+    </div>
 
 
 
@@ -16,6 +18,7 @@
             </div>
             @endif
             <div>
+                {{-- <form action="{{route('bulkCatDelete')}}" method="POST"> --}}
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -34,11 +37,13 @@
                             <td>{{$cat->name}}</td>
                             <th>{{$cat->status}}</th>
                             <td>
-                                <img src="{{$cat->file[0]->view_path}}" width="50" alt="cat image">
+                                @if(isset($cat->file))
+                                <img src="{{$cat->file->view_path}}" width="50" alt="cat image">
+                                @endif
                             </td>
                             <td>{{$cat->updated_at}}</td>
                             <td>
-                                {{-- <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a> --}}
+                                <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a>
                                 <form action="{{route('categorie.destroy', $cat->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -63,6 +68,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                </form>
             </div>
         </div>
     </div>

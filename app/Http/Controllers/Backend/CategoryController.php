@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Supports\Database\FileHandle;
+use App\Supports\Utilitis\FileHandle;
 use App\Models\{File, Category};
 
 class CategoryController extends Controller
@@ -47,15 +47,15 @@ class CategoryController extends Controller
     {
         //Net to fix;
         //return $request;
-        
         $cat = Category::create([
             'name' => $request->name,
             'description' => "Cat one description",
             'status'        => $request->status ? $request->status : 0,
         ]);
 
-        $cat->file()->create($this->uploadFile($request->file('category_image')));
-
+        if ($request->hasFile('category_image')) {
+            $cat->file()->create($this->uploadFile($request->file('category_image')));
+        }
         return redirect()->back();
     }
 
@@ -102,8 +102,25 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $cat = Category::find($id);
+
+        $file_info = $cat->file;
+        if (!empty($file_info)) {
+            $delete = $this->deleteFile($file_info);
+        }
+
         $cat->delete();
-        $cat->file()->delete();
+        // $cat->file()->delete();
         return redirect()->back();
     }
+
+
+    // /**
+    //  * @param array();
+    //  * @return status of delete
+    //  */
+
+    // public function bulkDelete(Request $request)
+    // {
+    //     return $request;
+    // }
 }

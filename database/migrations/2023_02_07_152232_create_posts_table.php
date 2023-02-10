@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('category_id');
             $table->text('title');
             $table->longText('body');
-            $table->integer('status');
-            $table->text('meta_keywords');
+            $table->integer('status')->default(1);
+            $table->text('meta_keywords')->nullable();
             $table->timestamps();
         });
     }
