@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Supports\Utilitis\FileHandle;
+use App\Supports\Utilitis\EasyReturn;
 use App\Models\{File, Category};
 
 class CategoryController extends Controller
 {
-    use FileHandle;
+    use FileHandle, EasyReturn;
 
     public function __construct()
     {
@@ -114,13 +115,44 @@ class CategoryController extends Controller
     }
 
 
-    // /**
-    //  * @param array();
-    //  * @return status of delete
-    //  */
+    /**
+     * @param array();
+     * @return status of delete
+     */
 
-    // public function bulkDelete(Request $request)
-    // {
-    //     return $request;
-    // }
+    public function bulkDelete(Request $request)
+    {
+        if (empty($request->category)) {
+            return $this->returnBack('Select Category');
+        }
+
+        if ($request->actionType == 1) {
+            foreach($request->category as $cat_id){
+                $cats = Category::find($cat_id);
+                $cats->delete();
+            }
+            return $this->returnBack('Category Delete Successfully');
+        }else if($request->actionType == 2){
+            foreach($request->category as $cat_id){
+                $cats = Category::find($cat_id);
+                $this->deleteFile($cats->file);
+                $cats->file->delete();
+            }
+            return  $this->returnBack("Image Delete Successfully");
+        }else if($request->actionType == 3){
+            foreach($request->category as $cat_id){
+                $cats = Category::find($cat_id);
+                if (!empty($cats->file)) {
+                    $this->deleteFile($cats->file);
+                    $cats->file->delete();
+                }
+                
+                $cats->delete();
+            }
+            return $this->returnBack("Category & Image Delete Successfully");
+        }
+
+        return $this->returnBack("Delete Faild");
+    }
+
 }

@@ -83,8 +83,7 @@
             </footer>
         </div>
     </div>
-    <script type="text/javascript">  
-       
-    </script>
+    
+    @yield('backscript')
 </body>
 </html>

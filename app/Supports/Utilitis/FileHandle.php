@@ -40,7 +40,9 @@ trait FileHandle
 
 	public function deleteFile($file)
 	{
-
+		if (empty($file)) {
+			return true;
+		}
 		$delete = Storage::delete($file->storage_path);
 		$db_delete = File::find($file->id)->delete();
 		return $delete;

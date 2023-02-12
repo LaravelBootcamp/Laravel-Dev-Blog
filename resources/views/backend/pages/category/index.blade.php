@@ -6,6 +6,9 @@
         <a href="{{route('categorie.create')}}" class="btn btn-outline-primary btn-sm d-inline-block ml-2">Add New</a>
     </div>
 
+    @if(Session::has('status'))
+    <p class="alert alert-info">{{ Session::get('status') }}</p>
+    @endif
 
 
     {{-- <x-backend.breadcrumb/> --}}
@@ -18,11 +21,23 @@
             </div>
             @endif
             <div>
-                {{-- <form action="{{route('bulkCatDelete')}}" method="POST"> --}}
-                <table class="table table-striped table-hover">
+                <form action="{{route('bulkCatDelete')}}" method="POST">
+                    @csrf
+                <div class="d-flex gap-2 justify-content-start float-start">
+                    <select class="form-select" name="actionType"  id="action_select-1" onchange="checkAction(this, 2)">
+                        <option value="0">Select Action</option>
+                        <option value="1">Delete Category</option>
+                        <option value="2">Delete Image</option>
+                        <option value="3">Delete Category & Image </option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
+                </div>
+                <table class="table table-striped table-hover" id="categorys">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>
+                                <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
+                            </th>
                             <th>Name</th>
                             <th>Status</th>
                             <th>Image</th>
@@ -33,7 +48,7 @@
                     <tbody>
                         @forelse($categorys as $cat)
                         <tr>
-                            <td><input type="checkbox" class="checkbox" name="category[]" value="{{$cat->id}}"> </td>
+                            <td><input type="checkbox" class="rowSelect form-check-input" name="category[]" value="{{$cat->id}}"> </td>
                             <td>{{$cat->name}}</td>
                             <th>{{$cat->status}}</th>
                             <td>
@@ -43,12 +58,12 @@
                             </td>
                             <td>{{$cat->updated_at}}</td>
                             <td>
-                                <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a>
+                                {{-- <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a>
                                 <form action="{{route('categorie.destroy', $cat->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn p-2 px-3 badge text-bg-danger">Delete</button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                         @empty
@@ -59,7 +74,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>#</th>
+                            <th>
+                                <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
+                            </th>
                             <th>Name</th>
                             <th>Status</th>
                             <th>Image</th>
@@ -68,9 +85,43 @@
                         </tr>
                     </tfoot>
                 </table>
+                <div class="d-flex gap-2 justify-content-start float-start">
+                    <select class="form-select" name="actionType" id="action_select-2" onchange="checkAction(this, 1)">
+                        <option value="0">Select Action</option>
+                        <option value="1">Delete Category</option>
+                        <option value="2">Delete Image</option>
+                        <option value="3">Delete Category & Image </option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
+                </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+
+
+@section('backscript')
+    <script type="text/javascript">
+        const btnWrap = document.querySelectorAll('.rowSelect');
+        function checkAllRow(event, id){
+            if(event.checked){
+                document.querySelector(`#checkAll-${id}`).checked = true
+                btnWrap.forEach((el) => {
+                    el.checked = true
+                })
+            }else{
+                document.querySelector(`#checkAll-${id}`).checked = false
+                btnWrap.forEach((el) => {
+                    el.checked = false
+                })
+            }
+        }
+
+        function checkAction(el, t){
+            document.querySelector(`#action_select-${t}`).value = el.value;
+        }
+    </script>
 @endsection
