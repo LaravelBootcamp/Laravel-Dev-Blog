@@ -119,7 +119,6 @@ class CategoryController extends Controller
      * @param array();
      * @return status of delete
      */
-
     public function bulkDelete(Request $request)
     {
         if (empty($request->category)) {
@@ -151,8 +150,17 @@ class CategoryController extends Controller
             }
             return $this->returnBack("Category & Image Delete Successfully");
         }
-
         return $this->returnBack("Delete Faild");
     }
 
+    /**
+     * @return Category trashed data with view
+     * */
+
+    public function trashedCategory(Request $request)
+    {
+        // return "OK";
+        $categorys = Category::onlyTrashed()->get();
+        return view('backend.pages.category.trash', compact('categorys'));
+    }
 }

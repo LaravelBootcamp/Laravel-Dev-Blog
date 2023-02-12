@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\File;
 use App\Supports\Utilitis\DateTimeFormater;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use HasFactory, DateTimeFormater;
+    use HasFactory, DateTimeFormater, SoftDeletes;
 
     protected $fillable = [
         'name', 'description', 'status'

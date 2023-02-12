@@ -1,15 +1,15 @@
 @extends('backend.layouts.app')
+
 @section('content')
 <div class="container-fluid px-4">
     <div class="d-flex my-3 align-items-center g-2">
         <h3 class="m-0 mr-2">Cagegorys</h3>
-        <a href="{{route('categorie.create')}}" class="btn btn-outline-primary btn-sm d-inline-block mx-2">Add New</a>
-        <a href="{{route('trushCats')}}" class="btn btn-outline-primary btn-sm d-inline-block ml-2">Trash</a>
+        {{-- <a href="{{route('categorie.create')}}" class="btn btn-outline-primary btn-sm d-inline-block ml-2">Add New</a> --}}
     </div>
 
-    @if(Session::has('status'))
+    {{-- @if(Session::has('status'))
     <p class="alert alert-info">{{ Session::get('status') }}</p>
-    @endif
+    @endif --}}
 
 
     {{-- <x-backend.breadcrumb/> --}}

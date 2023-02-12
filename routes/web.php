@@ -33,4 +33,5 @@ Route::prefix('dashboard')->group(function() {
     Route::resource('categorie', CategoryController::class);
     Route::resource('tag', TagController::class);
     Route::post('/bulkcatdelete', [CategoryController::class, 'bulkDelete'])->name('bulkCatDelete');
+    Route::get('/cats/trash', [CategoryController::class, 'trashedCategory'])->name('trushCats');
 });
