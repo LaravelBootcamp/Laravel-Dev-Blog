@@ -130,26 +130,16 @@ class CategoryController extends Controller
                 $cats = Category::find($cat_id);
                 $cats->delete();
             }
-            return $this->returnBack('Category Delete Successfully');
+            return $this->returnBack('Category moved to trash successfully');
         }else if($request->actionType == 2){
             foreach($request->category as $cat_id){
                 $cats = Category::find($cat_id);
-                $this->deleteFile($cats->file);
                 $cats->file->delete();
-            }
-            return  $this->returnBack("Image Delete Successfully");
-        }else if($request->actionType == 3){
-            foreach($request->category as $cat_id){
-                $cats = Category::find($cat_id);
-                if (!empty($cats->file)) {
-                    $this->deleteFile($cats->file);
-                    $cats->file->delete();
-                }
-                
                 $cats->delete();
             }
             return $this->returnBack("Category & Image Delete Successfully");
         }
+
         return $this->returnBack("Delete Faild");
     }
 
@@ -159,8 +149,50 @@ class CategoryController extends Controller
 
     public function trashedCategory(Request $request)
     {
-        // return "OK";
-        $categorys = Category::onlyTrashed()->get();
+        $categorys = Category::onlyTrashed()->with(['file' => function($q){
+            $q->withTrashed()->get();
+        }])->get();
+        //return $categorys;
         return view('backend.pages.category.trash', compact('categorys'));
+    }
+
+
+    /**
+     * @param Cagegory Id in array
+     * @return Category Permanently delete 
+     * */
+
+    public function bulkCatFourceDelete(Request $request)
+    {
+        if (empty($request->category)) {
+            return $this->returnBack('Select Category');
+        }
+
+        if ($request->actionType == 1) {
+            foreach($request->category as $cat_id){
+                $cats = Category::withTrashed()->find($cat_id);
+                $cats->forceDelete();
+            }
+            return $this->returnBack('Category Delete Successfully');
+        }else if($request->actionType == 2){
+            foreach($request->category as $cat_id){
+                $cats = Category::withTrashed()->find($cat_id);
+                // return $cats->file()->withTrashed()->get();
+                if (!empty($cats->file()->withTrashed()->first())) {
+                    $this->deleteFile($cats->file()->withTrashed()->first());
+                    $cats->file()->withTrashed()->forceDelete();
+                }
+                $cats->forceDelete();
+            }
+            return $this->returnBack("Category & Image Delete Successfully");
+        }elseif ($request->actionType == 3) {
+            foreach($request->category as $cat_id){
+                $cat = Category::withTrashed()->find($cat_id);
+                $file = $cat->file()->withTrashed()->first();
+                $file->restore();
+                $cat->restore();
+            }
+        }
+        return $this->returnBack("Delete Faild");
     }
 }

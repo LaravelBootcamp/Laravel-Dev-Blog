@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->integer('otp')->nullable();
             $table->rememberToken()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

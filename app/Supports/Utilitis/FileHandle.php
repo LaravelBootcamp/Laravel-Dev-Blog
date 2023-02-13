@@ -44,7 +44,7 @@ trait FileHandle
 			return true;
 		}
 		$delete = Storage::delete($file->storage_path);
-		$db_delete = File::find($file->id)->delete();
+		$db_delete = File::withTrashed()->find($file->id)->delete();
 		return $delete;
 	}
 }

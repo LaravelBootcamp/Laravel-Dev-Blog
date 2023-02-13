@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('file_type');
             $table->integer('user_id');
             $table->morphs('fileable');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

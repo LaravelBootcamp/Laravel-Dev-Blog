@@ -22,14 +22,14 @@
             </div>
             @endif
             <div>
-                <form action="{{route('bulkCatDelete')}}" method="POST">
+                <form action="{{route('bulkCatFourceDelete')}}" method="POST">
                     @csrf
                 <div class="d-flex gap-2 justify-content-start float-start">
                     <select class="form-select" name="actionType"  id="action_select-1" onchange="checkAction(this, 2)">
                         <option value="0">Select Action</option>
-                        <option value="1">Delete Category</option>
-                        <option value="2">Delete Image</option>
-                        <option value="3">Delete Category & Image </option>
+                        <option value="1">Permanently Delete Category</option>
+                        <option value="2">Permanently Delete Category & Image </option>
+                        <option value="3">Restore Cagegory & Image</option>
                     </select>
                     <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
                 </div>
@@ -89,9 +89,9 @@
                 <div class="d-flex gap-2 justify-content-start float-start">
                     <select class="form-select" name="actionType" id="action_select-2" onchange="checkAction(this, 1)">
                         <option value="0">Select Action</option>
-                        <option value="1">Delete Category</option>
-                        <option value="2">Delete Image</option>
-                        <option value="3">Delete Category & Image </option>
+                        <option value="1">Permanently Delete Category</option>
+                        <option value="2">Permanently Delete Category & Image </option>
+                        <option value="3">Restore Cagegory & Image</option>
                     </select>
                     <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
                 </div>

@@ -4,20 +4,15 @@
     <div class="d-flex my-3 align-items-center g-2">
         <h3 class="m-0 mr-2">Cagegorys</h3>
         <a href="{{route('categorie.create')}}" class="btn btn-outline-primary btn-sm d-inline-block mx-2">Add New</a>
-        <a href="{{route('trushCats')}}" class="btn btn-outline-primary btn-sm d-inline-block ml-2">Trash</a>
+        <a href="{{route('trushCats')}}" class="btn btn-outline-danger btn-sm d-inline-block ml-2">Trash</a>
     </div>
-
-    @if(Session::has('status'))
-    <p class="alert alert-info">{{ Session::get('status') }}</p>
-    @endif
-
 
     {{-- <x-backend.breadcrumb/> --}}
     <div class="card">
         <div class="card-header">{{ __('Cagegory list') }}</div>
         <div class="card-body">
             @if (session('status'))
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success" id="status_show" role="alert">
                 {{ session('status') }}
             </div>
             @endif
@@ -27,9 +22,8 @@
                 <div class="d-flex gap-2 justify-content-start float-start">
                     <select class="form-select" name="actionType"  id="action_select-1" onchange="checkAction(this, 2)">
                         <option value="0">Select Action</option>
-                        <option value="1">Delete Category</option>
-                        <option value="2">Delete Image</option>
-                        <option value="3">Delete Category & Image </option>
+                        <option value="1">Category Move to Trash</option>
+                        <option value="2">Category & Image Move to Trash </option>
                     </select>
                     <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
                 </div>
@@ -89,9 +83,8 @@
                 <div class="d-flex gap-2 justify-content-start float-start">
                     <select class="form-select" name="actionType" id="action_select-2" onchange="checkAction(this, 1)">
                         <option value="0">Select Action</option>
-                        <option value="1">Delete Category</option>
-                        <option value="2">Delete Image</option>
-                        <option value="3">Delete Category & Image </option>
+                        <option value="1">Category Move to Trash</option>
+                        <option value="2">Category & Image Move to Trash </option>
                     </select>
                     <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
                 </div>
@@ -124,5 +117,9 @@
         function checkAction(el, t){
             document.querySelector(`#action_select-${t}`).value = el.value;
         }
+
+        setTimeout(() => {
+            document.querySelector('#status_show').classList.add('d-none');
+        }, 5000)
     </script>
 @endsection

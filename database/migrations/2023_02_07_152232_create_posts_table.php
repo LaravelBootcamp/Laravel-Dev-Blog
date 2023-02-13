@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('body');
             $table->integer('status')->default(1);
             $table->text('meta_keywords')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
