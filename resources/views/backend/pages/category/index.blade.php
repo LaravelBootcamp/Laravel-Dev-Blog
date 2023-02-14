@@ -52,6 +52,7 @@
                             </td>
                             <td>{{$cat->updated_at}}</td>
                             <td>
+                                <a href="{{route('categorie.edit', ['categorie' => $cat->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
                                 {{-- <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a>
                                 <form action="{{route('categorie.destroy', $cat->id)}}" method="POST">
                                     @csrf

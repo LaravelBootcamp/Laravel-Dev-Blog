@@ -79,7 +79,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category =  Category::with('file')->find($id);
+        // return $category;
+        return view('backend.pages.category.edit', compact('category'));
     }
 
     /**
@@ -91,7 +93,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request['status'] = $request->status ? $request->status : 0;
+        // $category = Category::where('id', $id)->update([
+        //     'name'  => $request->name,
+        //     'description'   => $request->description,
+        //     'status'       => $request->status,
+        // ]);
+
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->status = $request->status;
+        $category->update();
+
+        if ($request->hasFile('category_image')) {
+            return $this->replaceFile($request->file('category_image'), $id);
+           $category->file()->associate($this->replaceFile($request->file('category_image'), $id));
+        }
+
+        return redirect()->route('categorie.index');
     }
 
     /**
