@@ -32,6 +32,9 @@ Route::prefix('dashboard')->group(function() {
     Route::resource('post', PostController::class);
     Route::resource('categorie', CategoryController::class);
     Route::resource('tag', TagController::class);
+    Route::get('trashedtags', [TagController::class, 'trashedTags'])->name('trashedTags');
+    Route::post('trashedTagsHandle', [TagController::class, 'trashedTagsHandle'])->name('trashedTagsHandle');
+    Route::post('tagsBulkDestroy', [TagController::class, 'tagsBulkDestroy'])->name('tagsBulkDestroy');
     Route::post('/bulkcatdelete', [CategoryController::class, 'bulkDelete'])->name('bulkCatDelete');
     Route::get('/cats/trash', [CategoryController::class, 'trashedCategory'])->name('trushCats');
     Route::post('/cats/trashdelete', [CategoryController::class, 'bulkCatFourceDelete'])->name('bulkCatFourceDelete');

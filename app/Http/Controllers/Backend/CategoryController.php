@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::with('file')->get();
+        $categorys = Category::with('file')->latest()->paginate(10);
         // return $categorys;
         return view('backend.pages.category.index', compact('categorys'));
     }
