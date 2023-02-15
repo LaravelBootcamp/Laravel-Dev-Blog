@@ -72,7 +72,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('backend.pages.tag.edit', compact('tag'));
     }
 
     /**
@@ -84,7 +85,14 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // return $request;
+        $tag = Tag::find($id);
+        $tag->name = $request->name;
+        $tag->description = $request->description;
+        $tag->status = $request->status;
+        $tag->update();
+
+        return redirect()->route('tag.index');
     }
 
     /**

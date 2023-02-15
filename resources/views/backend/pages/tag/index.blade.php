@@ -35,30 +35,21 @@
                                 </th>
                                 <th>Name</th>
                                 <th>Status</th>
-                                <th>Image</th>
+                                <th>Description</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($tags as $cat)
+                            @forelse($tags as $tag)
                             <tr>
-                                <td><input type="checkbox" class="rowSelect form-check-input" name="tag[]" value="{{$cat->id}}"> </td>
-                                <td>{{$cat->name}}</td>
-                                <th>{{$cat->status}}</th>
+                                <td><input type="checkbox" class="rowSelect form-check-input" name="tag[]" value="{{$tag->id}}"> </td>
+                                <td>{{$tag->name}}</td>
+                                <td>{{$tag->status}}</td>
+                                <td>{{$tag->description}}</td>
+                                <td>{{$tag->updated_at}}</td>
                                 <td>
-                                    @if(isset($cat->file))
-                                    <img src="{{$cat->file->view_path}}" width="50" alt="cat image">
-                                    @endif
-                                </td>
-                                <td>{{$cat->updated_at}}</td>
-                                <td>
-                                    {{-- <a class="btn p-2 px-3 badge text-bg-primary" data-id="{{$cat->id}}">Edit</a>
-                                    <form action="{{route('categorie.destroy', $cat->id)}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn p-2 px-3 badge text-bg-danger">Delete</button>
-                                    </form> --}}
+                                    <a href="{{route('tag.edit', ['tag' => $tag->id])}}" class="btn btn-sm px-3 btn-outline-primary">Edit </a>
                                 </td>
                             </tr>
                             @empty
@@ -74,7 +65,7 @@
                                 </th>
                                 <th>Name</th>
                                 <th>Status</th>
-                                <th>Image</th>
+                                <th>Description</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
