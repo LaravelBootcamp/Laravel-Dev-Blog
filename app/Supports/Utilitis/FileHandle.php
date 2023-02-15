@@ -62,15 +62,16 @@ trait FileHandle
 		}
 		$oldFile = Category::withTrashed()->find($cat_id);
 		
-		if (empty($oldFile->file)) {
-			$delete = Storage::delete($oldFile->storage_path);
-			$db_delete = File::withTrashed()->find($oldFile->id)->delete();
+		if (!empty($oldFile->file)) {
+			// return $oldFile->file->storage_path;
+			$delete = Storage::delete($oldFile->file->storage_path);
+			$db_delete = File::withTrashed()->find($oldFile->file->id)->forceDelete();
 		}
 
 
 		// insert new		
 		$save_to_store = $this->uploadFile($newFile);
-		// return $save_to_store;
+		return $save_to_store;
 		$db_insert = File::create($save_to_store);
 		return $save_to_store;
 	}

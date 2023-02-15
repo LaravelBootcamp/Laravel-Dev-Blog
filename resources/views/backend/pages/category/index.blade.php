@@ -35,6 +35,7 @@
                             <th>Name</th>
                             <th>Status</th>
                             <th>Image</th>
+                            <th>Description</th>
                             <th>Updated At</th>
                             <th>Action</th>
                         </tr>
@@ -50,6 +51,7 @@
                                 <img src="{{$cat->file->view_path}}" width="50" alt="cat image">
                                 @endif
                             </td>
+                            <th><p>{{$cat->description}}</p></th>
                             <td>{{$cat->updated_at}}</td>
                             <td>
                                 <a href="{{route('categorie.edit', ['categorie' => $cat->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
@@ -75,6 +77,7 @@
                             <th>Name</th>
                             <th>Status</th>
                             <th>Image</th>
+                            <th>Description</th>
                             <th>Updated At</th>
                             <th>Action</th>
                         </tr>

@@ -107,8 +107,8 @@ class CategoryController extends Controller
         $category->update();
 
         if ($request->hasFile('category_image')) {
-            return $this->replaceFile($request->file('category_image'), $id);
-           $category->file()->associate($this->replaceFile($request->file('category_image'), $id));
+            //return $this->replaceFile($request->file('category_image'), $id);
+           $category->file()->create($this->replaceFile($request->file('category_image'), $id));
         }
 
         return redirect()->route('categorie.index');
