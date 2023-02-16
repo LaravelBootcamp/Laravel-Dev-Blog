@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -18,7 +19,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.post.index');
+        $posts = Post::paginate(10);
+        return view('backend.pages.post.index', compact('posts'));
     }
 
     /**
@@ -28,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.post.create');
     }
 
     /**
