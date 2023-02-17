@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Supports\Utilitis\DateTimeFormater;
+use App\Models\Post;
 
 
 class Tag extends Model
@@ -15,6 +16,12 @@ class Tag extends Model
         'name', 'description', 'status'
     ];
 
+
+    //Relations
+    public function post()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 
     //Date formate mutator
     public function getUpdatedAtAttribute($value)

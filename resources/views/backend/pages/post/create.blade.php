@@ -32,12 +32,13 @@
                                     <option value="{{$tag->id}}">{{$tag->name}}</option>
                                     @endforeach
                                 </select>
+                                <span>Ctrl+click for multiple select</span>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="file" class="form-label">Image</label>
-                        <input type="file" value="" class="form-control" id="file" name="category_image">
+                        <input type="file" value="" class="form-control" id="file" name="post_thumbnail">
                         <div>
                             <span id="removeImage" class="badge bg-danger float-end p-2 d-none" style="cursor: pointer;">x</span>
                             <img src="" id="uploadPreview" class="w-100">
@@ -48,8 +49,8 @@
                         <textarea class="form-control" id="body" name="body" style="height: 250px;"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="metakeywords">Meta Key Words (`,` Separated)</label>
-                        <input class="form-control" name="metakeywords" type="text" id="metakeywords">
+                        <label for="meta_keywords">Meta Key Words (`,` Separated)</label>
+                        <input class="form-control" name="meta_keywords" type="text" id="meta_keywords">
                     </div>
                     <div class="form-check form-switch mb-3">
                         <input class="form-check-input" name="status" type="checkbox" value="1" id="status" checked>

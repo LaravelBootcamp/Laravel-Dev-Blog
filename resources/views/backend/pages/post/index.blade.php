@@ -33,7 +33,7 @@
                                 <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
                             </th>
                             <th>Name</th>
-                            <th>Status</th>
+                            <th>Title</th>
                             <th>Image</th>
                             <th>Description</th>
                             <th>Updated At</th>
@@ -45,16 +45,16 @@
                         <tr>
                             <td><input type="checkbox" class="rowSelect form-check-input" name="postegory[]" value="{{$post->id}}"> </td>
                             <td>{{$post->name}}</td>
-                            <th>{{$post->status}}</th>
+                            <th>{{$post->title}}</th>
                             <td>
                                 @if(isset($post->file))
                                 <img src="{{$post->file->view_path}}" width="50" alt="post image">
                                 @endif
                             </td>
-                            <th><p>{{$post->description}}</p></th>
+                            <th><p>{{$post->body}}</p></th>
                             <td>{{$post->updated_at}}</td>
                             <td>
-                                <a href="{{route('postegorie.edit', ['postegorie' => $post->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
+                                <a href="{{route('post.edit', ['post' => $post->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
                             </td>
                         </tr>
                         @empty
@@ -69,7 +69,7 @@
                                 <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
                             </th>
                             <th>Name</th>
-                            <th>Status</th>
+                            <th>Title</th>
                             <th>Image</th>
                             <th>Description</th>
                             <th>Updated At</th>
