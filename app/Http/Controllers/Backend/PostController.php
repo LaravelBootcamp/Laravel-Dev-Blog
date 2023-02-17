@@ -98,7 +98,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        // return $id;
+        $postData = Post::with(['file', 'tag'])->find($id);
+        $categorys = Category::get();
+        $tags = Tag::get();
+        // return $postData;
+        return view('backend.pages.post.edit', compact('postData', 'categorys', 'tags'));
     }
 
     /**

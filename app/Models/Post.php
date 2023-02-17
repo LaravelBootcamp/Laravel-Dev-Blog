@@ -27,10 +27,10 @@ class Post extends Model
     }
 
 
-    public function getBodyAttribute($value)
-    {
-        return Str::limit($value, 100);
-    }
+    // public function getBodyAttribute($value)
+    // {
+    //     return Str::limit($value, 100);
+    // }
 
     public function getUpdatedAtAttribute($value)
     {
