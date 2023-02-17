@@ -2,14 +2,14 @@
 @section('content')
 <div class="container-fluid px-4">
     <div class="d-flex my-3 align-items-center g-2">
-        <h3 class="m-0 mr-2">Posts</h3>
-        <a href="{{route('post.create')}}" class="btn btn-outline-primary btn-sm d-inline-block mx-2">Add New</a>
-        <a href="{{route('trashPostShow')}}" class="btn btn-outline-danger btn-sm d-inline-block ml-2">Trash</a>
+        <h3 class="m-0 mr-2">Trashed Posts</h3>
+        <a href="{{route('post.index')}}" class="btn btn-outline-primary btn-sm d-inline-block mx-2">Go Back</a>
+        {{-- <a href="{{route('trushposts')}}" class="btn btn-outline-danger btn-sm d-inline-block ml-2">Trash</a> --}}
     </div>
 
     {{-- <x-backend.breadcrumb/> --}}
     <div class="card">
-        <div class="card-header">{{ __('Post list') }}</div>
+        <div class="card-header">{{ __('Trashed list') }}</div>
         <div class="card-body">
             @if (session('status'))
             <div class="alert alert-success" id="status_show" role="alert">
@@ -22,8 +22,8 @@
                 <div class="d-flex gap-2 justify-content-start float-start">
                     <select class="form-select" name="actionType"  id="action_select-1" onchange="checkAction(this, 2)">
                         <option value="0">Select Action</option>
-                        <option value="1">Move to Trash</option>
-                        <option value="2">Delete Permanently</option>
+                        <option value="3">Restore</option>
+                        <option value="2">Delete Permanently </option>
                     </select>
                     <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
                 </div>
@@ -41,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($posts as $post)
+                        @forelse($trashPost as $post)
                         <tr>
                             <td><input type="checkbox" class="rowSelect form-check-input" name="posts[]" value="{{$post->id}}"> </td>
                             <th>{{$post->title}}</th>
@@ -78,14 +78,14 @@
                 <div class="d-flex gap-2 justify-content-start float-start">
                     <select class="form-select" name="actionType" id="action_select-2" onchange="checkAction(this, 1)">
                         <option value="0">Select Action</option>
-                        <option value="1">Move to Trash</option>
-                        <option value="2">Delete Permanently</option>
+                        <option value="3">Restore</option>
+                        <option value="2">Delete Permanently </option>
                     </select>
                     <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
                 </div>
                 </form>
                 <div class="d-flex">
-                    {!! $posts->links() !!}
+                    {{-- {!! $trashPost->links() !!} --}}
                 </div>
             </div>
         </div>

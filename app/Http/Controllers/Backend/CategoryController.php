@@ -181,7 +181,6 @@ class CategoryController extends Controller
      * @param Cagegory Id in array
      * @return Category Permanently delete 
      * */
-
     public function bulkCatFourceDelete(Request $request)
     {
         if (empty($request->category)) {

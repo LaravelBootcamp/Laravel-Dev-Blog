@@ -123,4 +123,46 @@ class PostController extends Controller
     {
         //
     }
+
+
+    /**
+     * Show trashed post page 
+     */
+    public function trashPost(Request $request)
+    {
+        $trashPost = Post::onlyTrashed()->get();
+        return view('backend.pages.post.trash', compact('trashPost'));
+    }
+
+
+    public function bulkPostAction(Request $request)
+    {
+        if (empty($request->posts)) {
+            return $this->returnBack();
+        }
+
+        if ($request->actionType == 1) {
+            foreach ($request->posts as $post_id) {
+                $post = Post::withTrashed()->find($post_id);
+                $post->delete();
+            }
+            return $this->returnBack("Moved to Trash Successfuly");
+        }elseif($request->actionType == 2){
+            foreach ($request->posts as $post_id) {
+                $post = Post::withTrashed()->find($post_id);
+                if (!$post->file()->withTrashed()->first()) {
+                    $this->deleteFile($post->file()->withTrashed()->first());
+                    $post->file()->withTrashed()->forceDelete();
+                }
+                $post->forceDelete();
+            }
+            return $this->returnBack("Post Delete Successfully");            
+        }elseif($request->actionType == 3){
+            foreach ($request->posts as $post_id) {
+                $post = Post::withTrashed()->find($post_id);
+                $post->restore();
+            }
+            return $this->returnBack("Post Restore Successfully");   
+        }
+    }
 }

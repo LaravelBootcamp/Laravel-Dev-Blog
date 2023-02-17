@@ -23,6 +23,6 @@ class Category extends Model
 
     public function getUpdatedAtAttribute($value)
     {
-        return $this->getFormatedData(date: $value);
+        return $this->getFormatedDate(date: $value);
     }
 }

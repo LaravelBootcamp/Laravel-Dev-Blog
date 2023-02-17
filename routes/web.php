@@ -38,4 +38,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::post('/bulkcatdelete', [CategoryController::class, 'bulkDelete'])->name('bulkCatDelete');
     Route::get('/cats/trash', [CategoryController::class, 'trashedCategory'])->name('trushCats');
     Route::post('/cats/trashdelete', [CategoryController::class, 'bulkCatFourceDelete'])->name('bulkCatFourceDelete');
+
+    //Post addition routs
+    Route::get('/trashedPost', [PostController::class, 'trashPost'])->name('trashPostShow');
+    Route::post('/bulkPostAction', [PostController::class, 'bulkPostAction'])->name('bulkPostAction');
+    // Route::post('/bulkPostRestore', [PostController::class, 'bulkPostRestore'])->name('bulkPostRestore');
 });

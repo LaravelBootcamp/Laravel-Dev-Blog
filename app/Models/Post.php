@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\{Tag, File};
 use Illuminate\Support\Str;
+use App\Supports\Utilitis\DateTimeFormater;
+use Carbon\Carbon;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, DateTimeFormater;
 
 
 
@@ -28,5 +30,11 @@ class Post extends Model
     public function getBodyAttribute($value)
     {
         return Str::limit($value, 100);
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::create($value)->format('Y-m-d');
+        //return $this->getFormatedDate($value, 'd-M-Y');
     }
 }

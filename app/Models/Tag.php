@@ -26,7 +26,7 @@ class Tag extends Model
     //Date formate mutator
     public function getUpdatedAtAttribute($value)
     {
-        return $this->getFormatedData(date: $value, formate: 'd-M-Y');
+        return $this->getFormatedDate(date: $value, formate: 'd-M-Y');
     }
 
     // White space remove accessor
