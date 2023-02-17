@@ -85,7 +85,7 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request;
+        isset($request->status) == null ? $request['status'] = 0 : $request['status'] = 1;
         $tag = Tag::find($id);
         $tag->name = $request->name;
         $tag->description = $request->description;

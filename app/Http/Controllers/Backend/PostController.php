@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\{Post, Category, Tag};
 
 class PostController extends Controller
 {
@@ -30,7 +30,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.post.create');
+
+        $categorys = Category::where('status', 1)->get();
+        $tags = Tag::where('status', 1)->get();
+        return view('backend.pages.post.create', compact('categorys', 'tags'));
     }
 
     /**
@@ -41,7 +44,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = $request->validate([
+            'title'     => 'required|max:256',
+        ]);
     }
 
     /**

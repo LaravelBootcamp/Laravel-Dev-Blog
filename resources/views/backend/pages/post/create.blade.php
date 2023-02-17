@@ -19,30 +19,18 @@
                                 <label for="category">Category</label>
                                 <select class="form-select" id="category" name="category">
                                     <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach ($categorys as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div>
                                 <label for="post_tags">Tags</label>
                                 <select class="form-select" id="post_tags" name="tags[]" size="4" multiple >
                                     <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach ($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -51,7 +39,8 @@
                         <label for="file" class="form-label">Image</label>
                         <input type="file" value="" class="form-control" id="file" name="category_image">
                         <div>
-                            <img src="" id="uploadPreview">
+                            <span id="removeImage" class="badge bg-danger float-end p-2 d-none" style="cursor: pointer;">x</span>
+                            <img src="" id="uploadPreview" class="w-100">
                         </div>
                     </div>
                     <div class="mb-3">
@@ -59,12 +48,12 @@
                         <textarea class="form-control" id="body" name="body" style="height: 250px;"></textarea>
                     </div>
                     <div class="mb-3">
-                      <label for="metakeywords">Meta Key Words (`,` Separated)</label>
-                      <input class="form-control" name="metakeywords" type="text" id="metakeywords">
+                        <label for="metakeywords">Meta Key Words (`,` Separated)</label>
+                        <input class="form-control" name="metakeywords" type="text" id="metakeywords">
                     </div>
                     <div class="form-check form-switch mb-3">
-                      <input class="form-check-input" name="status" type="checkbox" value="1" id="status" checked>
-                      <label class="form-check-label" for="status">Active</label>
+                        <input class="form-check-input" name="status" type="checkbox" value="1" id="status" checked>
+                        <label class="form-check-label" for="status">Active</label>
                     </div>
                     <button type="submit" class="btn btn-outline-primary btn-lg px-5"> Save </button>
                 </form>
@@ -72,4 +61,19 @@
         </div>
     </div>
 </div>
+@endsection
+@section('backscript')
+<script type="text/javascript">
+const input = document.querySelector('#file')
+input.addEventListener('change', (ev) => {
+document.querySelector('#removeImage').classList.remove('d-none')
+let tempUrl = URL.createObjectURL(ev.target.files[0])
+document.querySelector('#uploadPreview').src = tempUrl;
+})
+document.querySelector('#removeImage').addEventListener('click', () => {
+document.querySelector('#uploadPreview').src = ''
+input.value="";
+document.querySelector('#removeImage').classList.add('d-none')
+})
+</script>
 @endsection
