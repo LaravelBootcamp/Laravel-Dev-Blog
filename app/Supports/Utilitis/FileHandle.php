@@ -55,17 +55,18 @@ trait FileHandle
 	 * @return file delete and set new imae 
 	 */
 
-	public function replaceFile($newFile, $cat_id)
+	public function replaceFile($newFile, $oldFile)
 	{
+	
 		if (empty($newFile)) {
 			return true;
 		}
-		$oldFile = Category::withTrashed()->find($cat_id);
-		
+		//$oldFile = Category::withTrashed()->find($cat_id);
+
 		if (!empty($oldFile->file)) {
 			// return $oldFile->file->storage_path;
-			$delete = Storage::delete($oldFile->file->storage_path);
-			$db_delete = File::withTrashed()->find($oldFile->file->id)->forceDelete();
+			$delete = Storage::delete($oldFile->storage_path);
+			$db_delete = File::withTrashed()->find($oldFile->id)->forceDelete();
 		}
 
 

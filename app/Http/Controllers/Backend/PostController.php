@@ -115,7 +115,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $valid = $request->validate([
+            'title'     => 'required|max:256',
+            'category'  => 'required',
+            'file'     => 'post_thumbnail|mimes:jpg,png,jpeg,gif,svg',
+        ]);
+        $post = Post::with('file')->find($id);
+        // return $post;
+
+        $post->user_id          = Auth::id();
+        $post->category_id      = $request->category;
+        $post->title            = $request->title;
+        $post->body             = $request->body;
+        $post->status           = $request->status? $request->status : 0;
+        $post->meta_keywords    = json_encode(explode(',', $request->meta_keywords));
+        $post->update();
+
+       
+        if ($request->hasFile('post_thumbnail')) {
+            $post->file()->create($this->replaceFile($request->file('file'), $post->file));
+        }
+        return redirect()->route('post.index')->with("status", "Post Saved Successfuly");
     }
 
     /**

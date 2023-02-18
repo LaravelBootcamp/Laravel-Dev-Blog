@@ -29,11 +29,11 @@
                                 <label for="post_tags">Tags</label>
                                 <select class="form-select" id="post_tags" name="tags[]" size="4" multiple >
                                     <option>Open this select menu</option>
-                                    @foreach ($tags as $tag)
-                                        @foreach ($postData->tag as $postTag)
-                                            <option value="{{$tag->id}}" @if($tag->id == $postTag->id) selected @endif>{{$tag->name}}</option>
+
+                                        @foreach ($tags as $key => $tag)
+                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
                                         @endforeach
-                                    @endforeach
+                                   
                                 </select>
                                 <span>Ctrl+click for multiple select</span>
                             </div>
@@ -41,10 +41,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="file" class="form-label">Image</label>
-                        <input type="file" value="{{$postData->file->view_path}}" class="form-control" id="file" name="post_thumbnail">
+                        <input type="file" value="" class="form-control" id="file" name="post_thumbnail">
                         <div>
                             <span id="removeImage" class="badge bg-danger float-end p-2 d-none" style="cursor: pointer;">x</span>
-                            <img src="{{$postData->file->view_path}}" id="uploadPreview" class="w-100">
+                            @if ($postData->file)
+                                <img src="{{$postData->file->view_path}}" id="uploadPreview" class="w-100">
+                            @else
+                                <img src="" id="uploadPreview" class="w-100">
+                            @endif
                         </div>
                     </div>
                     <div class="mb-3">
