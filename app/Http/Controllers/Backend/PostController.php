@@ -100,9 +100,11 @@ class PostController extends Controller
     {
         // return $id;
         $postData = Post::with(['file', 'tag'])->find($id);
+        // return $postData;
         $categorys = Category::get();
         $tags = Tag::get();
         // return $postData;
+        // dd(array_column($postData->tag->toArray(), 'id'));
         return view('backend.pages.post.edit', compact('postData', 'categorys', 'tags'));
     }
 
