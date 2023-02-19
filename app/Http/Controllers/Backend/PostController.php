@@ -123,7 +123,7 @@ class PostController extends Controller
             'category'  => 'required',
             'file'     => 'post_thumbnail|mimes:jpg,png,jpeg,gif,svg',
         ]);
-        $post = Post::with('file')->find($id);
+        $post = Post::with(['file', 'tag'])->find($id);
         // return $post;
 
         $post->user_id          = Auth::id();
@@ -135,9 +135,21 @@ class PostController extends Controller
         $post->update();
 
        
-        if ($request->hasFile('post_thumbnail')) {
+        if ($request->hasFile('post_thumbnail') && isset($post->file)) {
+            //return $this->replaceFile($request->file('file'), $post->file);
             $post->file()->create($this->replaceFile($request->file('file'), $post->file));
+        }elseif ($request->hasFile('post_thumbnail') && !isset($post->file)) {
+            $post->file()->create($this->uploadFile($request->file('post_thumbnail')));
         }
+
+        $post->tag()->detach(array_column($post->tag->toArray(), 'id'));
+
+        if (isset($request->tags)) {
+            foreach ($request->tags as $tag_id) {
+                $post->tag()->attach($tag_id);
+            }
+        }
+        
         return redirect()->route('post.index')->with("status", "Post Saved Successfuly");
     }
 

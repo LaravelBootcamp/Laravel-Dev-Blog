@@ -25,42 +25,12 @@
                                     @endforeach
                                 </select>
                             </div>
-                                @php 
-                                    $array2 = [
-                                            [
-                                                "id"=> 1,
-                                                "name"=> "Tag One",
-                                                "description"=> "Tag description",
-                                                "status"=> 1,
-                                                "deleted_at"=> null,
-                                                "created_at"=> "2023-02-15T02:07:45.000000Z",
-                                                "updated_at"=> "18-Feb-2023",
-                                                
-                                            ],
-                                            [
-                                                "id"=> 2,
-                                                "name"=> "Tag two",
-                                                "description"=> "Tag two description",
-                                                "status"=> 1,
-                                                "deleted_at"=> null,
-                                                "created_at"=> "2023-02-15T02:08:01.000000Z",
-                                                "updated_at"=> "15-Feb-2023",
-                                            
-                                            ]
-                                        ];
-                                    //print_r($array2)
-
-
-                                        // $option = array_udiff_assoc($tags,  $array2, 'makeOptionForPostEditTag',);
-                                        // print_r($option);
-
-                                @endphp
                             <div>
                                 <label for="post_tags">Tags</label>
                                 <select class="form-select" id="post_tags" name="tags[]" size="4" multiple >
                                     <option>Open this select menu</option>
                                     @foreach ($tags as $tag)
-                                        <option @if( in_array($tag->id , array_column($postData->tag->toArray(), 'id')) ) selected @endif>{{$tag->name}}</option>
+                                        <option @if( in_array($tag->id , array_column($postData->tag->toArray(), 'id')) ) selected @endif value="{{$tag->id}}">{{$tag->name}}</option>
                                     @endforeach
                                 </select>
                                 <span>Ctrl+click for multiple select</span>
