@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\{
-    PostController, CategoryController, TagController
+    PostController, CategoryController, TagController, GenaralSettingController
 };
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +46,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
 
 
     Route::post('imageupload', [PostController::class, 'uploadImage'])->name('image.upload');
+
+    // Genaral Routs
+    Route::get('genaral-setting', [GenaralSettingController::class, 'index'])->name('gs.show');
+    Route::post('genaral-setting/siteSettingUpdate', [GenaralSettingController::class, 'siteSettingUpdate'])->name('gs.siteSettingUpdate');
 });
+
+
+
