@@ -512,3 +512,9 @@
   margin-top: 0.3em;
   margin-left: 1rem;
 }
+
+
+/*Ck Editor*/
+.ck-editor__editable {
+    min-height: 550px !important;
+}

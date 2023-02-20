@@ -43,4 +43,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::get('/trashedPost', [PostController::class, 'trashPost'])->name('trashPostShow');
     Route::post('/bulkPostAction', [PostController::class, 'bulkPostAction'])->name('bulkPostAction');
     // Route::post('/bulkPostRestore', [PostController::class, 'bulkPostRestore'])->name('bulkPostRestore');
+
+
+    Route::post('imageupload', [PostController::class, 'uploadImage'])->name('image.upload');
 });

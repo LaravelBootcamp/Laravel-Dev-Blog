@@ -205,4 +205,32 @@ class PostController extends Controller
             return $this->returnBack("Post Restore Successfully");   
         }
     }
+
+
+
+    /**
+     * Image upload 
+     * @param photo
+     * @return photo upload url 
+     */
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $uploadData = $this->uploadFile($request->file('upload'));
+            // return response()->json([
+            //     'fileName' => 'filf' , 
+            //     'uploaded' => 1, 
+            //     'url' => $uploadData['view_path']
+            // ]);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $msg = "File Upload Successfully";
+            $imgPath = $uploadData['view_path'];
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction ('$CKEditorFuncNum', '$imgPath', '$msg') </script>";
+            @header('Content-type: text/html; charset=utf-8');
+            echo $response;
+        }
+
+        
+    }
 }

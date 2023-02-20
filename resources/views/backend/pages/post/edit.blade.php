@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="body" class="form-label">Post Content</label>
-                        <textarea class="form-control" id="body" name="body" style="height: 250px;">{{$postData->body}}</textarea>
+                        <textarea class="form-control" id="body" name="body" style="height: 450px;">{{$postData->body}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="meta_keywords">Meta Key Words (`,` Separated)</label>
@@ -69,6 +69,9 @@
 </div>
 @endsection
 @section('backscript')
+
+{{-- Ck editor 4 --}}
+<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>    
     <script type="text/javascript">
         const input = document.querySelector('#file')
         input.addEventListener('change', (ev) => {
@@ -81,5 +84,10 @@
             input.value="";
             document.querySelector('#removeImage').classList.add('d-none')
         })
+
+        CKEDITOR.replace( 'body', {
+            filebrowserUploadUrl:"{{ route('image.upload',['_token' => csrf_token()] )}}",
+            filebrowserUploadMethod: "form",
+        });
     </script>
 @endsection

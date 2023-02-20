@@ -45,8 +45,8 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="body" class="form-label">Post Content</label>
-                        <textarea class="form-control" id="body" name="body" style="height: 250px;"></textarea>
+                        <label for="post_body" class="form-label">Post Content</label>
+                        <textarea class="form-control" id="post_body" name="body" style="height: 450px;"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="meta_keywords">Meta Key Words (`,` Separated)</label>
@@ -64,17 +64,28 @@
 </div>
 @endsection
 @section('backscript')
+
+{{-- Ck editor 4 --}}
+<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>    
+
 <script type="text/javascript">
-const input = document.querySelector('#file')
-input.addEventListener('change', (ev) => {
-document.querySelector('#removeImage').classList.remove('d-none')
-let tempUrl = URL.createObjectURL(ev.target.files[0])
-document.querySelector('#uploadPreview').src = tempUrl;
-})
-document.querySelector('#removeImage').addEventListener('click', () => {
-document.querySelector('#uploadPreview').src = ''
-input.value="";
-document.querySelector('#removeImage').classList.add('d-none')
-})
+    const input = document.querySelector('#file')
+    input.addEventListener('change', (ev) => {
+        document.querySelector('#removeImage').classList.remove('d-none')
+        let tempUrl = URL.createObjectURL(ev.target.files[0])
+        document.querySelector('#uploadPreview').src = tempUrl;
+    })
+    document.querySelector('#removeImage').addEventListener('click', () => {
+        document.querySelector('#uploadPreview').src = ''
+        input.value="";
+        document.querySelector('#removeImage').classList.add('d-none')
+    })
+
+
+    CKEDITOR.replace( 'post_body', {
+        filebrowserUploadUrl:"{{ route('image.upload',['_token' => csrf_token()] )}}",
+        filebrowserUploadMethod: "form",
+        height: 350
+    });
 </script>
 @endsection
