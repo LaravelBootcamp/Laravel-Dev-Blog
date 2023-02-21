@@ -19,4 +19,15 @@ trait GenaralSettingHelpers{
         return GenaralSetting::create(['key' => $key, 'value' => $val]);
     }
 
+
+
+    /**
+     * @param key name 
+     * @return value of the query
+     * */
+    public function getSetting($key)
+    {
+        $result = GenaralSetting::where('key', $key)->first();
+        return $result;
+    }
 }
