@@ -4,7 +4,6 @@ namespace App\Supports\Utilitis;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use App\Models\Category;
-
 use App\Models\File;
 
 
@@ -38,7 +37,6 @@ trait FileHandle
 	 * @param file
 	 * @return file delete status 
 	 */
-
 	public function deleteFile($file)
 	{
 		if (empty($file)) {
@@ -54,28 +52,20 @@ trait FileHandle
 	 * @param file
 	 * @return file delete and set new imae 
 	 */
-
 	public function replaceFile($newFile, $oldFile)
 	{
-	
 		if (empty($newFile)) {
 			return true;
 		}
-		//$oldFile = Category::withTrashed()->find($cat_id);
 
-		if (!empty($oldFile->file)) {
-			// return $oldFile->file->storage_path;
+		//Delete all
+		if (!empty($oldFile)) {
 			$delete = Storage::delete($oldFile->storage_path);
 			$db_delete = File::withTrashed()->find($oldFile->id)->forceDelete();
 		}
 
-
-		// insert new		
+		// insert new
 		$save_to_store = $this->uploadFile($newFile);
 		return $save_to_store;
-		$db_insert = File::create($save_to_store);
-		return $save_to_store;
 	}
-
-
 }

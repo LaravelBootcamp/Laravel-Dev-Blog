@@ -35,17 +35,19 @@ class GenaralSettingController extends Controller
     public function siteSettingUpdate(Request $request)
     {
         $data = $request->except(['_token', 'site_logo']);
-        // return $request->file('site_logo');
         foreach ($data as $key => $value) {
             $setingId = $this->addOrUpdate($key, $value);
         }
 
-
         if ($request->hasFile('site_logo')) {
             if ( GenaralSetting::where('key', 'site_logo')->count() > 0 ) {
-                $file = GenaralSetting::where('key', 'site_logo')->first();
-                $fileUpData = $this->uploadFile($request->file('site_logo'));
-                $file->file()->create($fileUpData);
+                $setting = GenaralSetting::where('key', 'site_logo')->first();
+                //$fileUpData = $this->uploadFile($request->file('site_logo'));
+
+                // return $this->replaceFile($request->file('site_logo'), $setting);
+                // return $request->file('site_logo');
+
+                $setting->file()->create($this->replaceFile($request->file('site_logo'), $setting->file));
             }else{
                 $settingRow = GenaralSetting::create([
                     'key'       => 'site_logo', 
@@ -56,12 +58,6 @@ class GenaralSettingController extends Controller
             }
            
         }
-        // GenaralSetting
-
-
-
-
-
         return $this->returnBack();
     }
 }
