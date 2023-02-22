@@ -84,6 +84,11 @@
         </div>
     </div>
     
+
+    <script src="{{asset('/assets/js/chart.min.js')}}"></script>
+    {{-- <script src="{{asset('/assets/js/chart-area-demo.js')}}"></script>
+    <script src="{{asset('/assets/js/chart-bar-demo.js')}}"></script>
+    <script src="{{asset('/assets/js/chart-pie-demo.js')}}"></script> --}}
     @yield('backscript')
 </body>
 </html>
