@@ -50,6 +50,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     // Genaral Routs
     Route::get('genaral-setting', [GenaralSettingController::class, 'index'])->name('gs.show');
     Route::post('genaral-setting/siteSettingUpdate', [GenaralSettingController::class, 'siteSettingUpdate'])->name('gs.siteSettingUpdate');
+    Route::post('genaral-setting/menuBuilder', [GenaralSettingController::class, 'menuBuilder'])->name('gs.menuBilder');
 });
 
 

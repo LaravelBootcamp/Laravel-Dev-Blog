@@ -56,8 +56,21 @@ class GenaralSettingController extends Controller
                 $fileUpData = $this->uploadFile($request->file('site_logo'));
                 $settingRow->file()->create($fileUpData);
             }
-           
         }
         return $this->returnBack();
+    }
+
+
+
+    public function menuBuilder(Request $request)
+    {
+        $menu_names = $request->menu_names;
+        $menu_links = $request->menu_links;
+        $ordering = $request->ordering;
+
+        $data = array_combine($menu_names, $menu_links,);
+
+        return $data;
+        return $request->all();
     }
 }

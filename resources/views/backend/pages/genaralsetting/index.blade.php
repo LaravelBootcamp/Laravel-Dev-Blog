@@ -36,7 +36,41 @@
              <div class="card">
                 <div class="card-header">{{ __('Menu Setting') }}</div>
                 <div class="card-body">
-                    <h4>Menu setting</h4>
+                    <form action="{{route('gs.menuBilder')}}" method="POST">
+                        @csrf
+                        <table class="table table-striped table-hover" id="menuBuilder">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-floating mb-3">
+                                          <input type="text" class="form-control" id="menuName" name="menu_names[]" placeholder="Menu Name">
+                                          <label for="menuName">Menu Name</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-floating mb-3">
+                                          <input type="text" class="form-control" id="menuLink" name="menu_links[]" placeholder="Menu Link">
+                                          <label for="menuLink">Menu Link</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning" type="button">x</button>
+                                        <input type="hidden" id='ordering' name="ordering[]" value="0">
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-secondary" id="menuRowAdd">Add New</button>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>
@@ -54,6 +88,41 @@
             imgPrev.src = URL.createObjectURL(e.target.files[0]);
         });
 
-    </script>
+        //Menu builder
 
+        const menuBulderTable = document.querySelector('#menuBuilder tbody');
+        const newRow = `
+            <tr>
+                <td>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="menuName" name="menu_names[]" placeholder="Menu Name">
+                      <label for="menuName">Menu Name</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="menuLink" name="menu_links[]" placeholder="Menu Link">
+                      <label for="menuLink">Menu Link</label>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-warning" type="button">x</button>
+                      <input type="hidden" id="ordering" name="ordering[]" value="0">
+                </td>
+            </tr>
+        `
+        document.querySelector("#menuRowAdd").addEventListener('click', (e) => {
+            menuBulderTable.insertAdjacentHTML('beforeend', newRow);
+            countTheRow();
+        })
+
+
+        function countTheRow(){
+            var rowCount = document.querySelectorAll('#menuBuilder tbody tr');
+            rowCount.forEach((el, i) => {
+                el.querySelector('#ordering').value = i;
+            })
+        }
+
+    </script>
 @endsection
