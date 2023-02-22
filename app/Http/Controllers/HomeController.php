@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\{
+    Post, Category, Tag, File
+};
 
 class HomeController extends Controller
 {
@@ -24,14 +26,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $dbChartData = Post::where('created_at', DB::raw(''))->get()->count();
         $dbChartData = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) data')
         ->groupBy('year', 'month')
         ->orderBy('year', 'desc')
-        ->get()->toArray();
-        // return $dbChartData;
-         $month_name =  json_encode(array_column($dbChartData, 'month'));
-        $datas =  json_encode(array_column($dbChartData, 'data'));
-        return view('backend.pages.dashboard', compact('dbChartData', 'month_name', 'datas'));
+        ->get();
+        $month_name =  array_column($dbChartData->toArray(), 'month');
+        $year_name =  array_column($dbChartData->toArray(), 'year');
+        $datas =  array_column($dbChartData->toArray(), 'data');
+
+        $totalPost = Post::get()->count();
+        $totalCategory = Category::get()->count();
+        $totalTag = Tag::get()->count();
+        $totalFile = File::get()->count();
+
+        return view('backend.pages.dashboard', compact('dbChartData', 'month_name','year_name', 'datas', 'totalFile', 'totalTag', 'totalPost', 'totalCategory'));
     }
 }
