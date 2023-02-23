@@ -518,3 +518,7 @@
 .ck-editor__editable {
     min-height: 550px !important;
 }
+
+#menuBuilder tbody td{
+  vertical-align: middle;
+}

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\{
-    PostController, CategoryController, TagController, GenaralSettingController
+    PostController, CategoryController, TagController, GenaralSettingController, UserController
 };
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +51,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::get('genaral-setting', [GenaralSettingController::class, 'index'])->name('gs.show');
     Route::post('genaral-setting/siteSettingUpdate', [GenaralSettingController::class, 'siteSettingUpdate'])->name('gs.siteSettingUpdate');
     Route::post('genaral-setting/menuBuilder', [GenaralSettingController::class, 'menuBuilder'])->name('gs.menuBilder');
+
+    //users route
+
+    Route::get('user-profile', [UserController::class, 'userProfile'])->name('userProfile');
 });
 
 

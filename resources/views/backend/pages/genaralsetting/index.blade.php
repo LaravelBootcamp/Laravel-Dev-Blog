@@ -48,19 +48,19 @@
                                 @foreach ($menu_items as $menu)
                                     <tr>
                                         <td>
-                                            <div class="form-floating mb-3">
+                                            <div class="form-floating">
                                               <input type="text" class="form-control" id="menuName" name="menu_names[]" value="{{$menu->menu_name}}" placeholder="Menu Name">
                                               <label for="menuName">Menu Name</label>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="form-floating mb-3">
+                                            <div class="form-floating">
                                               <input type="text" class="form-control" id="menuLink" value="{{$menu->menu_link}}" name="menu_links[]" placeholder="Menu Link">
                                               <label for="menuLink">Menu Link</label>
                                             </div>
                                         </td>
                                         <td>
-                                            <button class="btn btn-warning rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+                                            <button class="btn btn-danger rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                                             <input type="hidden" id='ordering' name="ordering[]" value="{{$menu->ordering}}">
                                         </td>
                                     </tr>
@@ -102,19 +102,19 @@
         const newRow = `
             <tr>
                 <td>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating">
                       <input type="text" class="form-control" id="menuName" name="menu_names[]" placeholder="Menu Name">
                       <label for="menuName">Menu Name</label>
                     </div>
                 </td>
                 <td>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating">
                       <input type="text" class="form-control" id="menuLink" name="menu_links[]" placeholder="Menu Link">
                       <label for="menuLink">Menu Link</label>
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn-warning rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+                    <button class="btn btn-danger rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                       <input type="hidden" id="ordering" name="ordering[]" value="0">
                 </td>
             </tr>
