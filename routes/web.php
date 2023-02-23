@@ -55,6 +55,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     //users route
 
     Route::get('user-profile', [UserController::class, 'userProfile'])->name('userProfile');
+    Route::post('user-update', [UserController::class, 'userUpdate'])->name('userUpdate');
 });
 
 
