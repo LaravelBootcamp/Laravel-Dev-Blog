@@ -13,6 +13,7 @@ trait GenaralSettingHelpers{
      */
     public function addOrUpdate($key, $val)
     {
+        // return $val;
         if ( GenaralSetting::where('key', $key)->count() > 0) {
             return GenaralSetting::where('key', $key)->update(['value' => $val]);
         }

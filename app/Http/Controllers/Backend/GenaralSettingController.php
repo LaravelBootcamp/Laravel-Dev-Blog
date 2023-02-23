@@ -23,8 +23,9 @@ class GenaralSettingController extends Controller
     {
         $siteInfo = GenaralSetting::pluck('value', 'key');
         $logo = $this->getSetting('site_logo')->file;
-        // return $logo;
-        return view('backend.pages.genaralsetting.index', compact('siteInfo', 'logo'));
+        $menu_items = json_decode($this->getSetting('nav_menu')->value);
+
+        return view('backend.pages.genaralsetting.index', compact('siteInfo', 'logo', 'menu_items'));
     }
     /**
      * @param key
@@ -42,11 +43,6 @@ class GenaralSettingController extends Controller
         if ($request->hasFile('site_logo')) {
             if ( GenaralSetting::where('key', 'site_logo')->count() > 0 ) {
                 $setting = GenaralSetting::where('key', 'site_logo')->first();
-                //$fileUpData = $this->uploadFile($request->file('site_logo'));
-
-                // return $this->replaceFile($request->file('site_logo'), $setting);
-                // return $request->file('site_logo');
-
                 $setting->file()->create($this->replaceFile($request->file('site_logo'), $setting->file));
             }else{
                 $settingRow = GenaralSetting::create([
@@ -68,9 +64,18 @@ class GenaralSettingController extends Controller
         $menu_links = $request->menu_links;
         $ordering = $request->ordering;
 
-        $data = array_combine($menu_names, $menu_links,);
+        //$data = array_combine($menu_names, $menu_links[$ordering],);
 
-        return $data;
-        return $request->all();
+        $result = array();
+
+        foreach ($menu_names as $key => $value) {
+            $result[$key]   = [
+                'menu_name' => $value,
+                'menu_link' => $menu_links[$key],
+                'ordering'  => $ordering[$key],
+            ];
+        }
+        $this->addOrUpdate('nav_menu', json_encode($result));
+        return $this->returnBack();
     }
 }

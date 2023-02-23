@@ -39,25 +39,33 @@
                     <form action="{{route('gs.menuBilder')}}" method="POST">
                         @csrf
                         <table class="table table-striped table-hover" id="menuBuilder">
-                            <tbody>
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <div class="form-floating mb-3">
-                                          <input type="text" class="form-control" id="menuName" name="menu_names[]" placeholder="Menu Name">
-                                          <label for="menuName">Menu Name</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-floating mb-3">
-                                          <input type="text" class="form-control" id="menuLink" name="menu_links[]" placeholder="Menu Link">
-                                          <label for="menuLink">Menu Link</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-warning" type="button">x</button>
-                                        <input type="hidden" id='ordering' name="ordering[]" value="0">
-                                    </td>
+                                    <th colspan="3">Nav Menu</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($menu_items as $menu)
+                                    <tr>
+                                        <td>
+                                            <div class="form-floating mb-3">
+                                              <input type="text" class="form-control" id="menuName" name="menu_names[]" value="{{$menu->menu_name}}" placeholder="Menu Name">
+                                              <label for="menuName">Menu Name</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating mb-3">
+                                              <input type="text" class="form-control" id="menuLink" value="{{$menu->menu_link}}" name="menu_links[]" placeholder="Menu Link">
+                                              <label for="menuLink">Menu Link</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+                                            <input type="hidden" id='ordering' name="ordering[]" value="{{$menu->ordering}}">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -106,7 +114,7 @@
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn-warning" type="button">x</button>
+                    <button class="btn btn-warning rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                       <input type="hidden" id="ordering" name="ordering[]" value="0">
                 </td>
             </tr>
@@ -122,7 +130,16 @@
             rowCount.forEach((el, i) => {
                 el.querySelector('#ordering').value = i;
             })
+           
         }
+
+
+        document.addEventListener('click', (el) => {
+            if(el.target.matches('.rowRemoveButton')){
+                el.target.parentNode.parentNode.remove();
+                countTheRow();
+            }
+        })
 
     </script>
 @endsection
