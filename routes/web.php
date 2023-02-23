@@ -16,9 +16,13 @@ use App\Http\Controllers\Backend\{
 |
 */
 
+/** Frontend routs */
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.layouts.app');
+})->name('home');
+
+
 
 
 
