@@ -2,13 +2,12 @@
 
 
 @section('front-content')
+	<div class="homePosts">
+		@foreach ($posts as $post)
+			<x-frontend.post-card :post="$post"/>
+		@endforeach
 
-
-<x-frontend.post-card/>
-<x-frontend.post-card/>
-<x-frontend.post-card/>
-<x-frontend.post-card/>
-<x-frontend.post-card/>
+	</div>
 
 
 

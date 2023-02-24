@@ -6,14 +6,16 @@ use Illuminate\View\Component;
 
 class AuthorInfo extends Component
 {
+
+    public $author;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($author)
     {
-        //
+        $this->author = $author;
     }
 
     /**

@@ -5,6 +5,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\{
     PostController, CategoryController, TagController, GenaralSettingController, UserController
 };
+
+use App\Http\Controllers\Frontend\{
+    PostController as FrontPostController,
+};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,13 +22,9 @@ use App\Http\Controllers\Backend\{
 
 /** Frontend routs */
 
-Route::get('/', function () {
-    return view('frontend.pages.home');
-})->name('home');
+Route::get('/', [FrontPostController::class, 'index'])->name('home');
 
-Route::get('/{slug}', function($slug){
-    return view('frontend.pages.post-single', ['slug' => $slug]);
-})->name('post.single');
+Route::get('/{slug}', [FrontPostController::class, 'postView'])->name('post.single');
 
 
 
