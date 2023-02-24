@@ -1806,3 +1806,41 @@ blockquote {
 .uipasta-credit a:hover {
     color: #333333;
 }
+
+
+
+/*Header top*/
+.topNav {
+    position: relative;
+    height: 74px;
+}
+
+.topNav>div{
+    background: white;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 1px 1px 5px #777;
+    position: fixed;
+    top: 0;
+}
+
+header.topNav ul li a {
+    font-size: 22px;
+}
+
+.subHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 25px;
+}
+.subHeader .col2 a {
+    display: inline-block;
+    font-size: 36px;
+}
+@media(max-width: 991px){
+    .aboutUs{
+        display: none;
+    }
+}
