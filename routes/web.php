@@ -19,10 +19,12 @@ use App\Http\Controllers\Backend\{
 /** Frontend routs */
 
 Route::get('/', function () {
-    return view('frontend.layouts.app');
+    return view('frontend.pages.home');
 })->name('home');
 
-
+Route::get('/{slug}', function($slug){
+    return view('frontend.pages.post-single', ['slug' => $slug]);
+})->name('post.single');
 
 
 
