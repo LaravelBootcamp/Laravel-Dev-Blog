@@ -33,6 +33,7 @@
                                 <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
                             </th>
                             <th>Name</th>
+                            <th>Slug</th>
                             <th>Status</th>
                             <th>Image</th>
                             <th>Description</th>
@@ -45,6 +46,7 @@
                         <tr>
                             <td><input type="checkbox" class="rowSelect form-check-input" name="category[]" value="{{$cat->id}}"> </td>
                             <td>{{$cat->name}}</td>
+                            <td>{{$cat->slug}}</td>
                             <th>{{$cat->status}}</th>
                             <td>
                                 @if(isset($cat->file))
@@ -65,7 +67,7 @@
                         </tr>
                         @empty
                             <tr>
-                                <td colspan="6">No Data found</td>
+                                <td colspan="7">No Data found</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -75,6 +77,7 @@
                                 <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
                             </th>
                             <th>Name</th>
+                            <th>Slug</th>
                             <th>Status</th>
                             <th>Image</th>
                             <th>Description</th>

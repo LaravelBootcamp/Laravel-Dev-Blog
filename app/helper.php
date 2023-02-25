@@ -7,7 +7,13 @@ use App\Models\{
 if (!function_exists('getSetting')) {
 	function getSetting($key)
 	{
-		return GenaralSetting::where('key', $key)->first()->value;
+		$data = GenaralSetting::where('key', $key)->first();
+		if ($data) {
+			return $data->value;
+		}
+		else{
+			return null;
+		}
 	}
 }
 
@@ -22,6 +28,10 @@ if (!function_exists('makePostExcept')) {
 if (!function_exists('getAuthor')) {
 	function getAuthor($id = 1)
 	{
-		return User::find($id);
+		$user =  User::find($id);
+		if ($user) {
+			return $user;
+		}
+		return null;
 	}
 }

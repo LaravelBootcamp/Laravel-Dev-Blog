@@ -20,6 +20,12 @@ use App\Http\Controllers\Frontend\{
 |
 */
 
+/** Admin route **/
+Auth::routes();
+
+
+
+
 /** Frontend routs */
 
 Route::get('/', [FrontPostController::class, 'index'])->name('home');
@@ -27,10 +33,6 @@ Route::get('/', [FrontPostController::class, 'index'])->name('home');
 Route::get('/{slug}', [FrontPostController::class, 'postView'])->name('post.single');
 
 
-
-/** Admin route **/
-
-Auth::routes();
 
 //Posts 
 Route::prefix('dashboard')->middleware('auth')->group(function() {

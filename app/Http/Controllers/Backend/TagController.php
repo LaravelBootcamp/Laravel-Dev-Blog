@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 use App\Supports\Utilitis\EasyReturn;
+use Illuminate\Support\Str;
+use App\Supports\Database\DataInsertHelper;
 
 class TagController extends Controller
 {
-    use EasyReturn;
+    use EasyReturn, DataInsertHelper;
     /**
      * Display a listing of the resource.
      *
@@ -43,12 +45,7 @@ class TagController extends Controller
             'name' => 'required|max:255',
             'description' => 'max:1000',
         ]);
-        // if (!isset($request->status)) {
-        //     return "ok";
-        // }
         isset($request->status) == null ? $request['status'] = 0 : $request['status'] = 1;
-
-        // return $request->all();
         $tag = Tag::create($request->all());
         return $this->returnBack("Tag created Successfully");
     }
@@ -88,6 +85,9 @@ class TagController extends Controller
         isset($request->status) == null ? $request['status'] = 0 : $request['status'] = 1;
         $tag = Tag::find($id);
         $tag->name = $request->name;
+        if (!is_null($request->slug)) {
+            $tag->slug = $this->uinqueSlug($request->slug, Tag::class);
+        }
         $tag->description = $request->description;
         $tag->status = $request->status;
         $tag->update();

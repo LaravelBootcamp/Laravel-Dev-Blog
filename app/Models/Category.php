@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\File;
 use App\Supports\Utilitis\DateTimeFormater;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Supports\Database\DataInsertHelper;
+use App\Models\File;
 
 class Category extends Model
 {
-    use HasFactory, DateTimeFormater, SoftDeletes;
+    use HasFactory, DateTimeFormater, SoftDeletes, DataInsertHelper;
 
     protected $fillable = [
-        'name', 'description', 'status'
+        'name', 'slug', 'description', 'status'
     ];
 
     public function file()
@@ -25,4 +26,13 @@ class Category extends Model
     {
         return $this->getFormatedDate(date: $value);
     }
+
+    //Slug Genaratror
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name']  = $value;
+        $this->attributes['slug']  = $this->uinqueSlug($value, Category::class);   
+    }
+
+    
 }

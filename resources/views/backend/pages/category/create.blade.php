@@ -14,6 +14,10 @@
                         <input type="text" class="form-control" name="name" id="cat_name" value="" required>
                     </div>
                     <div class="mb-3">
+                        <label for="slug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" name="slug" id="slug" value="">
+                    </div>
+                    <div class="mb-3">
                         <label for="file" class="form-label">Image</label>
                         <input type="file" value="" class="form-control" id="file" name="category_image">
                     </div>

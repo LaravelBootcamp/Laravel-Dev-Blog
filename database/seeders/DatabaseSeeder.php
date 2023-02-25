@@ -6,9 +6,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Supports\Database\GenaralSettingHelpers;
 
 class DatabaseSeeder extends Seeder
 {
+    use GenaralSettingHelpers;
     /**
      * Seed the application's database.
      *
@@ -24,5 +26,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12121212'),
             'remember_token' => Str::random(10),
         ]);
+
+
+        $this->addOrUpdate('site_title', 'Laravel Blog');
+        $this->addOrUpdate('site_tagline', 'Laravel Blog');
     }
 }

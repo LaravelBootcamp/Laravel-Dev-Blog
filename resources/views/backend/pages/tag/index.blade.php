@@ -34,6 +34,7 @@
                                     <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
                                 </th>
                                 <th>Name</th>
+                                <th>Slug</th>
                                 <th>Status</th>
                                 <th>Description</th>
                                 <th>Updated At</th>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td><input type="checkbox" class="rowSelect form-check-input" name="tag[]" value="{{$tag->id}}"> </td>
                                 <td>{{$tag->name}}</td>
+                                <td>{{$tag->slug}}</td>
                                 <td>{{$tag->status}}</td>
                                 <td>{{$tag->description}}</td>
                                 <td>{{$tag->updated_at}}</td>
@@ -54,7 +56,7 @@
                             </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6">No Data found</td>
+                                    <td colspan="7">No Data found</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -64,6 +66,7 @@
                                     <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
                                 </th>
                                 <th>Name</th>
+                                <th>Slug</th>
                                 <th>Status</th>
                                 <th>Description</th>
                                 <th>Updated At</th>

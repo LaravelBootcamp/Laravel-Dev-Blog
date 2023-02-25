@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
+use App\Supports\Database\DataInsertHelper;
 use App\Supports\Utilitis\{EasyReturn, FileHandle};
 use App\Models\{Post, Category, Tag};
 
 class PostController extends Controller
 {
-    use EasyReturn, FileHandle;
+    use EasyReturn, FileHandle, DataInsertHelper;
 
     public function __construct()
     {
@@ -61,12 +62,12 @@ class PostController extends Controller
         ]);
 
         $post = new Post();
-        $post->user_id      = Auth::id();
-        $post->category_id  = $request->category;
-        $post->title        = $request->title;
-        $post->body         = $request->body;
-        $post->status       = $request->status ? $request->status : 0;
-        $post->meta_keywords = json_encode(explode(',', $request->meta_keywords));
+        $post->user_id          = Auth::id();
+        $post->category_id      = $request->category;
+        $post->title            = $request->title;
+        $post->body             = $request->body;
+        $post->status           = $request->status ? $request->status : 0;
+        $post->meta_keywords    = json_encode(explode(',', $request->meta_keywords));
         $post->save();
 
 
@@ -105,11 +106,8 @@ class PostController extends Controller
     {
         // return $id;
         $postData = Post::with(['file', 'tag'])->find($id);
-        // return $postData;
         $categorys = Category::get();
         $tags = Tag::get();
-        // return $postData;
-        // dd(array_column($postData->tag->toArray(), 'id'));
         return view('backend.pages.post.edit', compact('postData', 'categorys', 'tags'));
     }
 
@@ -123,6 +121,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         
+        // if (is_null($post->slug)) {
+        //     return $request;
+        // }
         $valid = $request->validate([
             'title'     => 'required|max:256',
             'category'  => 'required',
@@ -134,6 +135,9 @@ class PostController extends Controller
         $post->user_id          = Auth::id();
         $post->category_id      = $request->category;
         $post->title            = $request->title;
+        if (!is_null($request->slug)) {
+            $post->slug         = $this->uinqueSlug($request->slug, Post::class);
+        }
         $post->body             = $request->body;
         $post->status           = $request->status? $request->status : 0;
         $post->meta_keywords    = json_encode(explode(',', $request->meta_keywords));

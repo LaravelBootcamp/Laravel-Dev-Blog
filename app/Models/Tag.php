@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Supports\Utilitis\DateTimeFormater;
+use App\Supports\Database\DataInsertHelper;
 use App\Models\Post;
 
 
 class Tag extends Model
 {
-    use HasFactory, SoftDeletes, DateTimeFormater;
+    use HasFactory, SoftDeletes, DateTimeFormater, DataInsertHelper;
     protected $fillable = [
         'name', 'description', 'status'
     ];
@@ -34,4 +35,12 @@ class Tag extends Model
     {
         $this->attributes['description'] = trim($value);
     }
+
+    //Slug Genaratror
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name']  = $value;
+        $this->attributes['slug']  = $this->uinqueSlug($value, Tag::class);   
+    }
+
 }

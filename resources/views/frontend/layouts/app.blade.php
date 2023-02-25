@@ -15,7 +15,7 @@
         <meta name="robots" content="index,follow">
         
         
-        <title>DevBlog - Personal Blog Template</title>
+        <title>{{getSetting('site_title')}} - {{getSetting('site_tagline')}}</title>
         
         <!-- Favicon -->
         <link rel="shortcut icon" href="images/favicon/favicon.ico">

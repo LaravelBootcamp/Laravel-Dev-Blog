@@ -34,6 +34,7 @@
                                 <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
                             </th>
                             <th>Title</th>
+                            <th>Slug</th>
                             <th>Image</th>
                             <th>Description</th>
                             <th>Updated At</th>
@@ -45,6 +46,7 @@
                         <tr>
                             <td><input type="checkbox" class="rowSelect form-check-input" name="posts[]" value="{{$post->id}}"> </td>
                             <th width="20%">{{$post->title}}</th>
+                            <th width="15%">{{$post->slug}}</th>
                             <td>
                                 @if(isset($post->file))
                                 <img src="{{$post->file->view_path}}" width="50" alt="post image">
@@ -58,7 +60,7 @@
                         </tr>
                         @empty
                             <tr>
-                                <td colspan="7">No Data found</td>
+                                <td colspan="8">No Data found</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -68,6 +70,7 @@
                                 <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
                             </th>
                             <th>Title</th>
+                            <th>Slug</th>
                             <th>Image</th>
                             <th>Description</th>
                             <th>Updated At</th>

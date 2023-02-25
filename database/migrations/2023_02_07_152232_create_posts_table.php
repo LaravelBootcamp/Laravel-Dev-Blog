@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('category_id');
-            $table->text('title');
+            $table->string('title');
+            $table->string('slug');
             $table->longText('body');
             $table->integer('status')->default(1);
             $table->text('meta_keywords')->nullable();

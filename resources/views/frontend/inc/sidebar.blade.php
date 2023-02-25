@@ -3,12 +3,14 @@
     <div class="about-fixed">
         <div class="my-pic">
             {{-- <img src="{{asset('assets/frontend/images/pic/my-pic.png')}}" alt=""> --}}
+            @if(getAuthor()->file)
             <img src="{{getAuthor()->file->view_path}}" alt="">
+            @endif
             <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
             <div id="menu" class="collapse">
                 <ul class="menu-link">
                     <li><a href="{{route('home')}}">Home</a></li>
-                    <li><a href="work.html">Work</a></li>
+                    <li><a href="{{route('dashboard')}}">Admin</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>

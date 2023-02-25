@@ -22,8 +22,8 @@ class GenaralSettingController extends Controller
     public function index(Request $request)
     {
         $siteInfo = GenaralSetting::pluck('value', 'key');
-        $logo = $this->getSetting('site_logo')->file;
-        $menu_items = json_decode($this->getSetting('nav_menu')->value);
+        $logo = getSetting('site_logo');
+        $menu_items = json_decode(getSetting('nav_menu'));
 
         return view('backend.pages.genaralsetting.index', compact('siteInfo', 'logo', 'menu_items'));
     }

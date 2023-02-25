@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Supports\Utilitis\FileHandle;
 use App\Supports\Utilitis\EasyReturn;
+use App\Supports\Database\DataInsertHelper;
 use App\Models\{File, Category};
 
 class CategoryController extends Controller
 {
-    use FileHandle, EasyReturn;
+    use FileHandle, EasyReturn, DataInsertHelper;
 
     public function __construct()
     {
@@ -49,8 +50,8 @@ class CategoryController extends Controller
         //Net to fix;
         //return $request;
         $cat = Category::create([
-            'name' => $request->name,
-            'description' => "Cat one description",
+            'name'          => $request->name,
+            'description'   => "Cat one description",
             'status'        => $request->status ? $request->status : 0,
         ]);
 
@@ -94,14 +95,12 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request['status'] = $request->status ? $request->status : 0;
-        // $category = Category::where('id', $id)->update([
-        //     'name'  => $request->name,
-        //     'description'   => $request->description,
-        //     'status'       => $request->status,
-        // ]);
-
+        
         $category = Category::find($id);
         $category->name = $request->name;
+        if (!is_null($request->slug)) {
+            $category->slug = $this->uinqueSlug($request->slug, Category::class);
+        }
         $category->description = $request->description;
         $category->status = $request->status;
         $category->update();

@@ -9,10 +9,11 @@ use Illuminate\Support\Str;
 use App\Supports\Utilitis\DateTimeFormater;
 use Carbon\Carbon;
 use App\Models\{Tag, File, Category, User};
+use App\Supports\Database\DataInsertHelper;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, DateTimeFormater;
+    use HasFactory, SoftDeletes, DateTimeFormater, DataInsertHelper;
 
 
 
@@ -54,13 +55,6 @@ class Post extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title']  = $value;
-        $this->attributes['slug']  = $this->uinqueSlug($value);
-    }
-
-    private function uinqueSlug($title){
-        $slug = Str::slug($title, '-');
-        $count = self::where('slug', 'LIKE', "{$slug}%")->count();
-        $newCount = $count > 0 ? ++$count  : '';
-        return $newCount > 0 ? "$slug-$newCount" : "$slug";
+        $this->attributes['slug']  = $this->uinqueSlug($value, Post::class);
     }
 }

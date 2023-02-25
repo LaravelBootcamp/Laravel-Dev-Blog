@@ -19,6 +19,10 @@
                         <input type="text" class="form-control" name="title" id="post_title" value="" required>
                     </div>
                     <div class="mb-3">
+                        <label for="post_slug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" name="slug" id="post_slug" value="">
+                    </div>
+                    <div class="mb-3">
                         <div class="d-flex gap-2 justify-content-start">
                             <div>
                                 <label for="category">Category</label>

@@ -30,6 +30,10 @@
                         <input type="text" class="form-control" id="name" name="name" value="{{$tag->name}}" placeholder="Name">
                         <label for="name">Name</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{$tag->slug}}" placeholder="slug">
+                        <label for="slug">Slug</label>
+                    </div>
                     <div class="form-floating mb-2">
                         <textarea class="form-control" name="description" placeholder="Tag description" id="description" style="height: 100px">{{$tag->description}}</textarea>
                         <label for="description">Description</label>

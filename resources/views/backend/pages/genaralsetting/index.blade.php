@@ -22,7 +22,9 @@
                             <label for="siteLogo" class="form-label">Site Logo</label>
                             <input type="file" class="form-control" name="site_logo" id="siteLogo">
                             <div id="logoPreview">
+                                @if($logo)
                                 <img src="{{$logo->view_path}}" class="w-50">
+                                @endif
                             </div>
                         </div>
                         <div class="mb-3">
@@ -45,26 +47,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($menu_items as $menu)
-                                    <tr>
-                                        <td>
-                                            <div class="form-floating">
-                                              <input type="text" class="form-control" id="menuName" name="menu_names[]" value="{{$menu->menu_name}}" placeholder="Menu Name">
-                                              <label for="menuName">Menu Name</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-floating">
-                                              <input type="text" class="form-control" id="menuLink" value="{{$menu->menu_link}}" name="menu_links[]" placeholder="Menu Link">
-                                              <label for="menuLink">Menu Link</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
-                                            <input type="hidden" id='ordering' name="ordering[]" value="{{$menu->ordering}}">
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if($menu_items)
+                                    @foreach ($menu_items as $menu)
+                                        <tr>
+                                            <td>
+                                                <div class="form-floating">
+                                                  <input type="text" class="form-control" id="menuName" name="menu_names[]" value="{{$menu->menu_name}}" placeholder="Menu Name">
+                                                  <label for="menuName">Menu Name</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-floating">
+                                                  <input type="text" class="form-control" id="menuLink" value="{{$menu->menu_link}}" name="menu_links[]" placeholder="Menu Link">
+                                                  <label for="menuLink">Menu Link</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger rowRemoveButton" type="button"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+                                                <input type="hidden" id='ordering' name="ordering[]" value="{{$menu->ordering}}">
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 
                             </tbody>
                             <tfoot>
