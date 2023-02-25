@@ -52,11 +52,14 @@ class PostController extends Controller
 
         //return $request->tags;
 
+        // return $request;
 
         $valid = $request->validate([
             'title'     => 'required|max:256',
             'file'      => 'file|mimes:jpg,png,jpeg,gif,svg',
+            'category'  => 'required|not_in:0'
         ]);
+
         $post = new Post();
         $post->user_id      = Auth::id();
         $post->category_id  = $request->category;
@@ -67,11 +70,13 @@ class PostController extends Controller
         $post->save();
 
 
+        if ($request->tags) {
+            foreach ($request->tags as $tag) {
+                $post->tag()->attach($tag);
+            }
 
-        foreach ($request->tags as $tag) {
-            $post->tag()->attach($tag);
         }
-
+        
         //upload file 
         if ($request->hasFile('post_thumbnail')) {
             $post->file()->create($this->uploadFile($request->file('post_thumbnail')));

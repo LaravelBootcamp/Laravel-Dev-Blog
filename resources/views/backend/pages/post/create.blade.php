@@ -3,6 +3,11 @@
 <div class="container-fluid px-4 cagegory_create">
     <h1 class="mt-4">Post Create</h1>
     {{-- <x-backend.breadcrumb/> --}}
+    <div class="w-50 m-auto text-center">
+        @if($errors->any())
+            {!! implode('', $errors->all('<div class="text-bg-danger">:message</div>')) !!}
+        @endif
+    </div>
     <div class="card w-50 m-auto ">
         <div class="card-header">{{ __('Create Post') }}</div>
         <div class="card-body">
@@ -18,7 +23,7 @@
                             <div>
                                 <label for="category">Category</label>
                                 <select class="form-select" id="category" name="category">
-                                    <option selected>Open this select menu</option>
+                                    <option selected value="0">Open this select menu</option>
                                     @foreach ($categorys as $cat)
                                     <option value="{{$cat->id}}">{{$cat->name}}</option>
                                     @endforeach
@@ -27,7 +32,7 @@
                             <div>
                                 <label for="post_tags">Tags</label>
                                 <select class="form-select" id="post_tags" name="tags[]" size="4" multiple >
-                                    <option selected>Open this select menu</option>
+                                    <option selected value="0">Open this select menu</option>
                                     @foreach ($tags as $tag)
                                     <option value="{{$tag->id}}">{{$tag->name}}</option>
                                     @endforeach
