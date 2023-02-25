@@ -44,14 +44,14 @@
                         @forelse($posts as $post)
                         <tr>
                             <td><input type="checkbox" class="rowSelect form-check-input" name="posts[]" value="{{$post->id}}"> </td>
-                            <th>{{$post->title}}</th>
+                            <th width="20%">{{$post->title}}</th>
                             <td>
                                 @if(isset($post->file))
                                 <img src="{{$post->file->view_path}}" width="50" alt="post image">
                                 @endif
                             </td>
                             <th><p>{{$post->body}}</p></th>
-                            <td>{{$post->updated_at}}</td>
+                            <td width="10%">{{$post->updated_at}}</td>
                             <td>
                                 <a href="{{route('post.edit', ['post' => $post->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
                             </td>

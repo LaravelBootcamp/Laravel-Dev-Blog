@@ -1,5 +1,5 @@
 <!-- Post Author Bio Box Start -->
-<div class="about-author margin-top-70 margin-bottom-50">
+<div class="about-author margin-top-30 margin-bottom-50">
     
     <div class="picture">
         <img src="{{$author->file->view_path}}" class="img-responsive" alt="">

@@ -34,7 +34,7 @@ Auth::routes();
 
 //Posts 
 Route::prefix('dashboard')->middleware('auth')->group(function() {
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/admin', [HomeController::class, 'index'])->name('dashboard');
     Route::resource('post', PostController::class);
     Route::resource('categorie', CategoryController::class);
     Route::resource('tag', TagController::class);

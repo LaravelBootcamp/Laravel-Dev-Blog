@@ -16,7 +16,7 @@ class PostController extends Controller
         // return $data;
 
 
-        $posts = Post::with(['file', 'tag', 'category', 'user.file'])->get();
+        $posts = Post::with(['file', 'category', 'user.file'])->get();
         // return $posts;
         $author = User::find(1);
         return view('frontend.pages.home', compact('posts', 'author'));
@@ -25,7 +25,7 @@ class PostController extends Controller
 
     public function postView(Request $request, $slug)
     {
-        $post = Post::with(['file', 'tag', 'category', 'user'])->find($slug);
+        $post = Post::with(['file', 'tag', 'category', 'user.file'])->whereSlug($slug)->first();
         return view('frontend.pages.post-single', compact('post'));
     }
 }

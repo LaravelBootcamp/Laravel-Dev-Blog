@@ -629,7 +629,7 @@ div.blog-post {
 }
 
 .blog-post .post-title h2 {
-    font-size: 25px;
+    font-size: 36px;
     line-height: 35px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -1852,7 +1852,12 @@ header.topNav ul li a {
 .blog-post .posts-content-wrap{
     padding: 15px 20px;
 }
-
+.postTags span {
+    background: #1abc9c;
+    padding: 4px 10px;
+    border-radius: 5px;
+    color: white;
+}
 
 @media(max-width: 991px){
     .aboutUs{
