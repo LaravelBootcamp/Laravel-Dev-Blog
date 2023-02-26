@@ -11,7 +11,7 @@
                     </a>
                 </div>
                 <div class="post-info">
-                    <span><a href="#" target="_blank">{{$post->category->name}} - </a></span>
+                    <span><a href="{{makeArchiveUrl($post->category->slug, 'categories')}}" target="_blank">{{$post->category->name}} - </a></span>
                     <span>{{$post->created_at}} / by <a href="#" target="_blank">{{$post->user->name}}</a></span>
                 </div>
                 <p>{!! makePostExcept($post->body, 30,) !!}</p>
@@ -29,6 +29,7 @@
                 </a>
             </div>  
             <div class="post-info">
+                <span><a href="{{makeArchiveUrl($post->category->slug, 'categories')}}" target="_blank">{{$post->category->name}} - </a></span>
                 <span>{{$post->created_at}} / by <a href="#" target="_blank">{{$post->user->name}}</a></span>
             </div>  
             <p>{!! makePostExcept($post->body) !!}</p>                                   

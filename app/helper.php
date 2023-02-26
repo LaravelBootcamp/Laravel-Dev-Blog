@@ -35,3 +35,11 @@ if (!function_exists('getAuthor')) {
 		return null;
 	}
 }
+
+
+if (!function_exists('makeArchiveUrl')) {
+	function makeArchiveUrl($slug, $slugPrefix)
+	{
+		return route('home').'/'.$slugPrefix.'/'.$slug;
+	}
+}
