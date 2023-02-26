@@ -32,6 +32,7 @@ Route::get('/', [FrontPostController::class, 'index'])->name('home');
 
 Route::get('/{slug}', [FrontPostController::class, 'postView'])->name('post.single');
 Route::get('/categories/{slug}', [FrontPostController::class, 'archiveView'])->name('post.archive');
+Route::get('/tags/{slug}', [FrontPostController::class, 'tagArchiveView'])->name('post.tagArchive');
 
 
 

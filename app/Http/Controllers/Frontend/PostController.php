@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Post, User, File, Category};
+use App\Models\{Post, User, File, Category, Tag};
 
 
 class PostController extends Controller
@@ -33,5 +33,16 @@ class PostController extends Controller
         $cats = Category::whereSlug($cat_slug)->get()->toArray();
         $posts = Post::whereIn('category_id', array_column($cats, 'id'))->get();
         return view('frontend.pages.post-archive', compact('posts'));
+    }
+
+    public function tagArchiveView(Request $request, $slug)
+    {
+        $data =  Tag::whereSlug($slug)->with(['post.user', 'post.category', 'post.user'])->first();
+        // $tagPosts =  Tag::whereSlug($slug)->get()->toArray();
+
+
+        $tagPosts = $data->post;
+        // $tag_id = array_column($tagPosts, 'id');
+        return view('frontend.pages.post-tag-archive', compact('tagPosts'));
     }
 }

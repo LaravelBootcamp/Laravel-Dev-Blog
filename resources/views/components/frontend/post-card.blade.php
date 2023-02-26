@@ -1,3 +1,4 @@
+{{-- {{dd($post)}} --}}
 @if($post->file)
     <div class="col-md-12 blog-post">
         <div>

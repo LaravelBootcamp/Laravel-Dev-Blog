@@ -1858,7 +1858,9 @@ header.topNav ul li a {
     border-radius: 5px;
     color: white;
 }
-
+.postTags span a {
+    color: white;
+}
 @media(max-width: 991px){
     .aboutUs{
         display: none;

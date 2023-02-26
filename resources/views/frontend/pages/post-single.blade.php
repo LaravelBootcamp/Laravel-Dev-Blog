@@ -20,7 +20,7 @@
 
 		<div class="postTags margin-top-100">
 			@foreach ($post->tag as $tag)
-				<span>{{$tag->name}}</span>
+				<span><a href="{{makeArchiveUrl($tag->slug, 'tags')}}">{{$tag->name}}</a></span>
 			@endforeach
 		</div>
 	

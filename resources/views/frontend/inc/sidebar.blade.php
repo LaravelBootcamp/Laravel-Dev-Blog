@@ -10,8 +10,7 @@
             <div id="menu" class="collapse">
                 <ul class="menu-link">
                     <li><a href="{{route('home')}}">Home</a></li>
-                    <li><a href="{{route('dashboard')}}">Admin</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{route('dashboard')}}" target="_blank">Admin</a></li>
                 </ul>
             </div>
         </div>
