@@ -8,7 +8,7 @@ use App\Supports\Utilitis\{
     EasyReturn, FileHandle,
 };
 use App\Models\{
-    GenaralSetting,File
+    GenaralSetting,File, Post, Category, Tag
 };
 
 class GenaralSettingController extends Controller
@@ -24,8 +24,11 @@ class GenaralSettingController extends Controller
         $siteInfo = GenaralSetting::pluck('value', 'key');
         $logo = getSetting('site_logo');
         $menu_items = json_decode(getSetting('nav_menu'));
-
-        return view('backend.pages.genaralsetting.index', compact('siteInfo', 'logo', 'menu_items'));
+        $posts = Post::select(['id', 'title', 'slug'])->limit(10)->get();
+        $categories = Category::select(['id', 'name', 'slug'])->limit(10)->get();
+        $tags = Tag::select(['id', 'name', 'slug'])->limit(10)->get();
+        // return $posts;
+        return view('backend.pages.genaralsetting.index', compact('siteInfo', 'logo', 'menu_items', 'posts', 'categories', 'tags'));
     }
     /**
      * @param key

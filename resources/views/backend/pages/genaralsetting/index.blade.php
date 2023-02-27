@@ -84,6 +84,11 @@
                         </table>
                     </form>
                 </div>
+                <div class="card-footer text-muted">
+                    Post menu url formate:  <code>/{slug}</code> <br/>
+                    Tags menu url formate:  <code>/tags/{slug}</code> <br/>
+                    Categories menu url formate:  <code>/categories/{slug}</code>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -99,18 +104,26 @@
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#available_menu_sec">
                                 <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Default checkbox
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Checked checkbox
-                                        </label>
-                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Slug</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($posts as $post)
+                                                <tr>
+                                                    <td>{{$post->title}}</td>
+                                                    <td>{{$post->slug}}</td>
+                                                    <td>
+                                                        <a href="/{{$post->slug}}" target="new">View</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +132,28 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">Category</button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#available_menu_sec">
-                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                <div class="accordion-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Slug</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($categories as $cat)
+                                                <tr>
+                                                    <td>{{$cat->name}}</td>
+                                                    <td>{{$cat->slug}}</td>
+                                                    <td>
+                                                        <a href="/{{$cat->slug}}" target="new">View</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -127,7 +161,28 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">Tag</button>
                             </h2>
                             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#available_menu_sec">
-                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                <div class="accordion-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Slug</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($tags as $tag)
+                                                <tr>
+                                                    <td>{{$tag->name}}</td>
+                                                    <td>{{$tag->slug}}</td>
+                                                    <td>
+                                                        <a href="/{{$tag->slug}}" target="new">View</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
