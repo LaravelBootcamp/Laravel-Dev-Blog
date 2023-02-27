@@ -1,9 +1,7 @@
 <!-- Footer Start -->
 <div class="col-md-12 page-body margin-top-50 footer">
 	<footer>
-		<ul class="menu-link">
-			<li><a href="{{route('home')}}">Home</a></li>
-		</ul>
+		<x-frontend.nav-menu :menus="$menu_items"/>
 		
 		<p>© Copyright {{date('Y')}} DevBlog. All rights reserved</p>
 		

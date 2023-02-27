@@ -57,7 +57,12 @@ class GenaralSettingController extends Controller
     }
 
 
-
+    /**
+     * @param menu_names
+     * @param menu_links
+     * @return redirect back with update status
+     * 
+     * */
     public function menuBuilder(Request $request)
     {
         $menu_names = $request->menu_names;

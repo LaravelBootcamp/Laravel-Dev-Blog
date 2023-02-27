@@ -38,11 +38,7 @@ class PostController extends Controller
     public function tagArchiveView(Request $request, $slug)
     {
         $data =  Tag::whereSlug($slug)->with(['post.user', 'post.category', 'post.user'])->first();
-        // $tagPosts =  Tag::whereSlug($slug)->get()->toArray();
-
-
         $tagPosts = $data->post;
-        // $tag_id = array_column($tagPosts, 'id');
         return view('frontend.pages.post-tag-archive', compact('tagPosts'));
     }
 }
