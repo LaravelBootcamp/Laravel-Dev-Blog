@@ -9,7 +9,7 @@
 
 	</div>
 
-
-
-<x-frontend.load-more />
+	<div style="text-align: center;">
+		{{$posts->links()}}
+	</div>
 @endsection

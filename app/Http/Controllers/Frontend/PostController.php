@@ -15,7 +15,7 @@ class PostController extends Controller
         // return $data;
 
 
-        $posts = Post::with(['file', 'category', 'user.file'])->get();
+        $posts = Post::with(['file', 'category', 'user.file'])->paginate(12);
         $author = User::find(1);
         $menu = getSetting('nav_menu');
         return view('frontend.pages.home', compact('posts', 'author'));
@@ -31,14 +31,14 @@ class PostController extends Controller
     public function archiveView(Request $request, $cat_slug)
     {
         $cats = Category::whereSlug($cat_slug)->get()->toArray();
-        $posts = Post::whereIn('category_id', array_column($cats, 'id'))->get();
+        $posts = Post::whereIn('category_id', array_column($cats, 'id'))->paginate(12);
         return view('frontend.pages.post-archive', compact('posts'));
     }
 
     public function tagArchiveView(Request $request, $slug)
     {
         $data =  Tag::whereSlug($slug)->with(['post.user', 'post.category', 'post.user'])->first();
-        $tagPosts = $data->post;
+        $tagPosts = $data->post()->paginate(12);
         return view('frontend.pages.post-tag-archive', compact('tagPosts'));
     }
 }

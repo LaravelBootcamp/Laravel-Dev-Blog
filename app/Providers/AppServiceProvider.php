@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
         $menu_items = json_decode(getSetting('nav_menu'));
-        // return $menu_items;
         View::share('menu_items',$menu_items);   
     }
 }

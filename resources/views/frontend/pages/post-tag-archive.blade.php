@@ -9,7 +9,6 @@
 
 	</div>
 
+	<div style="text-align: center;">{{$tagPosts->links()}}</div>
 
-
-<x-frontend.load-more />
 @endsection
