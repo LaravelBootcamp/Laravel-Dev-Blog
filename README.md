@@ -1,5 +1,5 @@
 <h2 align="center"> 
-    Laravel Fullstack simple blog 
+    Laravel full-stack simple Blog 
 </h2>
 
 <p>This is simple Fullstack Laravel Blog website. It's build with Only Laravel and minimum number of JavaScript. All query are running via Laravel Model. And all database table writen on migration file.</p>
