@@ -12,7 +12,9 @@
 		                <div class="card">
 		                    <div class="card-body">
 		                        <div class="d-flex flex-column align-items-center text-center">
-		                            <img src="https://avatars.githubusercontent.com/u/61359218?v=4" alt="Admin" class="rounded-circle" width="150">
+		                        	@if (Auth::user()->file)
+		                        		<img src="{{ Auth::user()->file->view_path }}" alt="Admin" class="rounded-circle" width="150">
+		                        	@endif
 		                            <div class="mt-3">
 		                                <h4>{{Auth::user()->name}}</h4>
 		                                <p class="text-secondary mb-1">Full stack developer | Laravel, Vue, Nuxt, PHP, MySql</p>
@@ -62,7 +64,7 @@
 		            <div class="col-lg-8">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{route('userUpdate')}}" method="POST">
+								<form action="{{route('userUpdate')}}" method="POST" enctype="multipart/form-data">
 									@csrf
 									<div class="row mb-3">
 										<div class="col-sm-3">
@@ -120,15 +122,15 @@
 										<h5 class="d-flex align-items-center mb-3">Project Status</h5>
 										<p>Posts</p>
 										<div class="progress mb-3" style="height: 5px">
-											<div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar bg-primary" role="progressbar" style="width: {{ $total_post }}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<p>Category</p>
 										<div class="progress mb-3" style="height: 5px">
-											<div class="progress-bar bg-info" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar bg-info" role="progressbar" style="width: {{ $total_category }}%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<p>Tags</p>
 										<div class="progress mb-3" style="height: 5px">
-											<div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar bg-success" role="progressbar" style="width: {{ $total_tag }}%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</div>
 								</div>

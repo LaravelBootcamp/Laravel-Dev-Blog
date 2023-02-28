@@ -19,75 +19,75 @@
             <div>
                 <form action="{{route('bulkPostAction')}}" method="POST">
                     @csrf
-                <div class="d-flex gap-2 justify-content-start float-start">
-                    <select class="form-select" name="actionType"  id="action_select-1" onchange="checkAction(this, 2)">
-                        <option value="0">Select Action</option>
-                        <option value="1">Move to Trash</option>
-                        <option value="2">Delete Permanently</option>
-                    </select>
-                    <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
-                </div>
-                <table class="table table-striped table-hover" id="posts">
-                    <thead>
-                        <tr>
-                            <th>
-                                <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
-                            </th>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Image</th>
-                            <th>Description</th>
-                            <th>Updated At</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($posts as $post)
-                        <tr>
-                            <td><input type="checkbox" class="rowSelect form-check-input" name="posts[]" value="{{$post->id}}"> </td>
-                            <th width="20%">{{$post->title}}</th>
-                            <th width="15%">{{$post->slug}}</th>
-                            <td>
-                                @if(isset($post->file))
-                                <img src="{{$post->file->view_path}}" width="50" alt="post image">
-                                @endif
-                            </td>
-                            <th><p>{{$post->body}}</p></th>
-                            <td width="10%">{{$post->updated_at}}</td>
-                            <td>
-                                <a href="{{route('post.edit', ['post' => $post->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
-                            </td>
-                        </tr>
-                        @empty
+                    <div class="d-flex gap-2 justify-content-start float-start">
+                        <select class="form-select" name="actionType"  id="action_select-1" onchange="checkAction(this, 2)">
+                            <option value="0">Select Action</option>
+                            <option value="1">Move to Trash</option>
+                            <option value="2">Delete Permanently</option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
+                    </div>
+                    <table class="table table-striped table-hover" id="posts">
+                        <thead>
                             <tr>
-                                <td colspan="8">No Data found</td>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" id="checkAll-1" onclick="checkAllRow(this, 2)">
+                                </th>
+                                <th>Title</th>
+                                <th>Slug</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
                             </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
-                            </th>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Image</th>
-                            <th>Description</th>
-                            <th>Updated At</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="d-flex gap-2 justify-content-start float-start">
-                    <select class="form-select" name="actionType" id="action_select-2" onchange="checkAction(this, 1)">
-                        <option value="0">Select Action</option>
-                        <option value="1">Move to Trash</option>
-                        <option value="2">Delete Permanently</option>
-                    </select>
-                    <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
-                </div>
+                        </thead>
+                        <tbody>
+                            @forelse($posts as $post)
+                            <tr>
+                                <td><input type="checkbox" class="rowSelect form-check-input" name="posts[]" value="{{$post->id}}"> </td>
+                                <th width="20%">{{$post->title}}</th>
+                                <th width="15%">{{$post->slug}}</th>
+                                <td>
+                                    @if(isset($post->file))
+                                    <img src="{{$post->file->view_path}}" width="50" alt="post image">
+                                    @endif
+                                </td>
+                                <th><p>{{$post->body}}</p></th>
+                                <td width="10%">{{$post->updated_at}}</td>
+                                <td>
+                                    <a href="{{route('post.edit', ['post' => $post->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
+                                </td>
+                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8">No Data found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input"  id="checkAll-2" value="" onclick="checkAllRow(this, 1)">
+                                </th>
+                                <th>Title</th>
+                                <th>Slug</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="d-flex gap-2 justify-content-start float-start clearfix">
+                        <select class="form-select" name="actionType" id="action_select-2" onchange="checkAction(this, 1)">
+                            <option value="0">Select Action</option>
+                            <option value="1">Move to Trash</option>
+                            <option value="2">Delete Permanently</option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-primary btn-sm px-2">Apply</button>
+                    </div>
                 </form>
-                <div class="d-flex">
+                <div class="ml-2">
                     {!! $posts->links() !!}
                 </div>
             </div>
