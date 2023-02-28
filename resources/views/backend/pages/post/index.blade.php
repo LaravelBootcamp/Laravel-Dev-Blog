@@ -36,7 +36,6 @@
                                 <th>Title</th>
                                 <th>Slug</th>
                                 <th>Image</th>
-                                <th>Description</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
@@ -52,7 +51,6 @@
                                     <img src="{{$post->file->view_path}}" width="50" alt="post image">
                                     @endif
                                 </td>
-                                <th><p>{{$post->body}}</p></th>
                                 <td width="10%">{{$post->updated_at}}</td>
                                 <td>
                                     <a href="{{route('post.edit', ['post' => $post->id])}}" class="btn btn-sm btn-outline-primary">Edit </a>
@@ -60,7 +58,7 @@
                             </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8">No Data found</td>
+                                    <td colspan="7">No Data found</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -72,7 +70,6 @@
                                 <th>Title</th>
                                 <th>Slug</th>
                                 <th>Image</th>
-                                <th>Description</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>

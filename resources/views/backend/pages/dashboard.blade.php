@@ -13,7 +13,7 @@
                     <div class="card bg-primary text-white mb-4">
                         <div class="card-body">Total Post</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">{{$totalPost}}</a>
+                            <a class="small text-white stretched-link" href="{{ route('post.index') }}">{{$totalPost}}</a>
                             <div class="small text-white">
                                 <i class="fas fa-angle-right"></i>
                             </div>
@@ -24,7 +24,7 @@
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body">Total Category</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">{{$totalCategory}}</a>
+                            <a class="small text-white stretched-link" href="{{ route('categorie.index') }}">{{$totalCategory}}</a>
                             <div class="small text-white">
                                 <i class="fas fa-angle-right"></i>
                             </div>
@@ -35,7 +35,7 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">Total Tag</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">{{$totalTag}}</a>
+                            <a class="small text-white stretched-link" href="{{ route('tag.index') }}">{{$totalTag}}</a>
                             <div class="small text-white">
                                 <i class="fas fa-angle-right"></i>
                             </div>
